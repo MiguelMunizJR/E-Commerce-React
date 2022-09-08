@@ -6,7 +6,7 @@ const Footer = () => {
       <h3 className="footer__title">© Miguel Muñiz 2022</h3>
       <div className="footer__links">
         <a
-          href="https://github.com/MiguelMunizJR/e-commerce-react"
+          href="https://github.com/MiguelMunizJR/e-commerce"
           target="_blank"
         >
           <i className="fa-brands fa-github footer__link"></i>

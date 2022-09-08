@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 
 const scrollToTop = () => {
@@ -39,12 +39,12 @@ const Purchases = () => {
       <article className="purchases__card">
         <h2 className="purchases__title">Purchases</h2>
         <div className="productinfo__return">
-        <p className="productinfo__return-home" onClick={() => navigate("/")}>
-          Home
-        </p>
-        <div className="productinfo__return-circle"></div>
-        <p className="productinfo__return-product">Purchases</p>
-      </div>
+          <p className="productinfo__return-home" onClick={() => navigate("/")}>
+            Home
+          </p>
+          <div className="productinfo__return-circle"></div>
+          <p className="productinfo__return-product">Purchases</p>
+        </div>
         <section className="purchases__container">
           {purchases?.map((purchase) => (
             <article className="purchases__product-card" key={purchase.id}>

@@ -11,7 +11,7 @@ const scrollToTop = () => {
   });
 };
 
-const ProductCard = ({ product, getAllCartProduct }) => {
+const ProductCard = ({ product, getAllProductsCart, setIsEmpty }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -24,16 +24,16 @@ const ProductCard = ({ product, getAllCartProduct }) => {
     e.stopPropagation();
     const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/cart";
     const obj = {
-      id: product.id,
+      id: product?.id,
       quantity: 1,
     };
 
     axios
       .post(URL, obj, getConfig())
       .then((res) => {
-        console.log(res.data);
-        alert("añadido al carrito");
-        getAllCartProduct();
+        alert("product added to cart");
+        getAllProductsCart();
+        setIsEmpty(false);
       })
       .catch((err) => console.log(err));
   };

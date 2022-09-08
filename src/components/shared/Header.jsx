@@ -1,55 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { NavLink } from "react-router-dom";
+import ProductCartInfo from "../products/ProductCartInfo";
 
-const Header = ({ cart, getAllCartProducts }) => {
+const Header = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
   const [total, setTotal] = useState(0);
-  
+
   const toggleCart = () => {
     const cartDisplay = document.querySelector(".cart");
     if (cartDisplay.style.display === "flex") {
       cartDisplay.style.display = "none";
     } else {
       cartDisplay.style.display = "flex";
+      getAllProductsCart();
     }
   };
 
+  useEffect(() => {
+    getAllProductsCart();
+  }, []);
+
   const handleCheckout = () => {
-    const cartDisplay = document.querySelector(".cart");
-    const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
-    const obj = {
-      street: "Green. 1456",
-      colony: "Southwest",
-      zipCode: 12645,
-      city: "USA",
-      references: "Some refences",
-    };
+    if (!cartProducts) {
+      alert("Your shopping cart is empty, add products");
+    } else {
+      const cartDisplay = document.querySelector(".cart");
+      const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
+      const obj = {
+        street: "Green. 1456",
+        colony: "Southwest",
+        zipCode: 12645,
+        city: "USA",
+        references: "Some refences",
+      };
 
-    axios
-      .post(URL, obj, getConfig())
-      .then((res) => {
-        console.log(res.data);
-        getAllCartProducts();
-        alert("Gracias por su compra");
-        cartDisplay.style.display = "none";
-      })
-      .catch((err) => {
-        console.log(err);
-        cartDisplay.style.display = "none";
-      });
+      axios
+        .post(URL, obj, getConfig())
+        .then((res) => {
+          console.log(res.data);
+          getAllProductsCart();
+          alert("Gracias por su compra");
+          setTotal(0);
+          setIsEmpty(true);
+          cartDisplay.style.display = "none";
+        })
+        .catch((err) => {
+          console.log(err);
+          getAllProductsCart();
+          cartDisplay.style.display = "none";
+        });
+    }
   };
-
-  const handleDeleteProduct = (id) => {
-    const URL = `https://ecommerce-api-react.herokuapp.com/api/v1/cart/${id}`;
-
-    axios
-      .delete(URL, getConfig())
-      .then(() => getAllCartProducts())
-      .catch((err) => console.log(err));
-  };
-
-  // console.log(cart);
 
   return (
     <header className="header">
@@ -88,36 +90,28 @@ const Header = ({ cart, getAllCartProducts }) => {
       </nav>
       <section className="cart">
         <article className="cart__header">
-          <h2 className="cart__title">Carrito de compras</h2>
+          <h2 className="cart__title">Shopping cart</h2>
           <section className="cart__container">
-            {cart?.products.map((product) => {
-              setTotal(total + product.price);
-              return (
-                <article className="cart__product-card" key={product.id}>
-                  <div className="cart__product-header">
-                    <div className="cart__product-brand">
-                      <p className="cart__product-brand-title">
-                        {product.brand}
-                      </p>
-                      <i
-                        className="fa-solid fa-trash-can"
-                        onClick={handleDeleteProduct(product.id)}
-                      ></i>
-                    </div>
-                    <h4 className="cart__product-title">{product.title}</h4>
-                    <span className="cart__product-quantity">
-                      {product.productsInCart.quantity}
-                    </span>
-                  </div>
-                  <div className="cart__product-footer">
-                    <p className="cart__product-total">Total:</p>
-                    <span className="cart__product-value">
-                      $ {product.productsInCart.quantity * product.price}
-                    </span>
-                  </div>
-                </article>
-              );
-            })}
+            {isEmpty ? (
+              <div className="cart__container-div">
+                <i className="fa-regular fa-face-frown"></i>
+                <h4 className="cart__container-message">
+                  Your shopping cart is empty
+                </h4>
+              </div>
+            ) : (
+              cartProducts?.map((product) => (
+                <ProductCartInfo
+                  key={product.id}
+                  product={product}
+                  getAllProductsCart={getAllProductsCart}
+                  setTotal={setTotal}
+                  total={total}
+                  isEmpty={isEmpty}
+                  setIsEmpty={setIsEmpty}
+                />
+              ))
+            )}
           </section>
         </article>
         <article className="cart__footer">

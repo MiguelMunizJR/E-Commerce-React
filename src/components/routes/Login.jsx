@@ -88,7 +88,6 @@ const Login = () => {
     logOutBtn.style.display = "none";
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setUser(undefined);
   };
 
   return (
@@ -107,7 +106,9 @@ const Login = () => {
         >
           <i className="fa-solid fa-user"></i>
           <h2 className="login__title">Welcome</h2>
-          <h3 className="login__user">{isLogin ? `${firstName} ${lastName}` : 'Guest_user'}</h3>
+          <h3 className="login__user">
+            {isLogin ? `${firstName} ${lastName}` : "Guest_user"}
+          </h3>
           <h3 className="login__subtitle">
             {isLogin ? "you are logged in" : "please login to your account"}
           </h3>
@@ -143,7 +144,9 @@ const Login = () => {
               ></i>
             </div>
             <div className="form__islogin">
-              <p className="form__islogin-title">Credentials are not valid</p>
+              <p className="form__islogin-title">
+                Incorrect email or password, please check your credentials.
+              </p>
             </div>
             <div className="form__options">
               <div className="form__remember">

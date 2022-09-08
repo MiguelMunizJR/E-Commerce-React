@@ -13,7 +13,7 @@ const scrollToTop = () => {
   });
 };
 
-const ProductDetails = ({ getAllCartProduct }) => {
+const ProductDetails = ({ getAllProductsCart, setIsEmpty }) => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ const ProductDetails = ({ getAllCartProduct }) => {
 
   useEffect(() => {
     const URL = `https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`;
-
     axios
       .get(URL)
       .then((res) => {
@@ -36,6 +35,7 @@ const ProductDetails = ({ getAllCartProduct }) => {
       });
     setQuantity(1);
     scrollToTop();
+    getAllProductsCart();
   }, [id]);
 
   const productCategory = products?.filter((item) => {
@@ -56,11 +56,12 @@ const ProductDetails = ({ getAllCartProduct }) => {
       .post(URL, obj, getConfig())
       .then((res) => {
         console.log(res.data);
-        getAllCartProduct();
-        setQuantity(1);
-        alert("agregado al carrito");
+        alert("product added to cart");
+        setIsEmpty(false);
       })
       .catch((err) => console.log(err));
+    getAllProductsCart();
+    setQuantity(1);
   };
 
   const quantityMinus = () => {
@@ -72,6 +73,8 @@ const ProductDetails = ({ getAllCartProduct }) => {
   const quantityPlus = () => {
     setQuantity(quantity + 1);
   };
+
+  // console.log(cartProducts);
 
   return (
     <section className="productinfo">

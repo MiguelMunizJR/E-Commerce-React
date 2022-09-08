@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../store/slices/products.slice.js.js";
 import ProductCard from "../products/ProductCard.jsx";
 
@@ -11,11 +12,13 @@ const scrollToTop = () => {
   });
 };
 
-const Home = ({ getAllCartProducts }) => {
+const Home = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [productsCategory, setProductsCategory] = useState();
   const [category, setCategory] = useState();
+  const [searchResult, setSearchResult] = useState();
 
   const productCategories = {
     Computers: products?.filter((item) => {
@@ -36,9 +39,6 @@ const Home = ({ getAllCartProducts }) => {
   };
 
   useEffect(() => {
-    dispatch(getAllProducts());
-    scrollToTop();
-
     switch (category) {
       case "all":
         setProductsCategory(products);
@@ -56,7 +56,40 @@ const Home = ({ getAllCartProducts }) => {
         setProductsCategory(products);
         break;
     }
+    dispatch(getAllProducts());
+    scrollToTop();
   }, [category]);
+
+  const handleSearchItem = (item) => {
+    console.log(item);
+    navigate(`/products/${item.id}`);
+  };
+
+  const toggleSearch = () => {
+    const searchContainer = document.querySelector(".search__container");
+
+    if (searchContainer.style.display === "flex") {
+      searchContainer.style.display = "none";
+    } else {
+      searchContainer.style.display = "flex";
+    }
+  };
+
+  const searchProducts = (e) => {
+    e.preventDefault();
+    const searchValue = e.target.value;
+
+    const filterSearchResult = products?.filter((item) =>
+      item?.title.toLowerCase().includes(searchValue)
+    );
+    setSearchResult(filterSearchResult);
+
+    const searchContainer = document.querySelector(".search__container");
+
+    if (searchContainer.style.display === "none") {
+      searchContainer.style.display = "flex";
+    }
+  };
 
   const filterPrice = (e) => {
     e.preventDefault();
@@ -69,9 +102,9 @@ const Home = ({ getAllCartProducts }) => {
       }
     });
     if (from == "" || to == "") {
-      setProductsCategory(products)
+      setProductsCategory(products);
     } else {
-      setProductsCategory(productsFilterPrice)
+      setProductsCategory(productsFilterPrice);
     }
     e.target.from.value = "";
     e.target.to.value = "";
@@ -90,7 +123,10 @@ const Home = ({ getAllCartProducts }) => {
                 type="number"
                 id="from"
                 className="filter__price-input"
-                placeholder="$"
+                placeholder="min $200"
+                min="200"
+                max="5000"
+                step="15"
               />
             </div>
             <div className="price__div to">
@@ -99,7 +135,10 @@ const Home = ({ getAllCartProducts }) => {
                 type="number"
                 id="to"
                 className="filter__price-input"
-                placeholder="$"
+                placeholder="max $5000"
+                min="200"
+                max="10000"
+                step="15"
               />
             </div>
             <button className="price__btn">Filter price</button>
@@ -110,7 +149,10 @@ const Home = ({ getAllCartProducts }) => {
           <ul className="filter__category-list">
             <li
               className="filter__category-item"
-              onClick={() => setProductsCategory(products)}
+              onClick={() => {
+                setProductsCategory(products);
+                scrollToTop();
+              }}
             >
               All
             </li>
@@ -136,16 +178,31 @@ const Home = ({ getAllCartProducts }) => {
         </div>
       </aside>
       <article className="home__products">
-        <div className="home__search">
+        <form className="home__search" onChange={searchProducts}>
           <input
             type="text"
+            id="search"
             placeholder="What are you looking for?"
             className="search__input"
+            onClick={toggleSearch}
           />
           <button className="search__btn">
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
-        </div>
+          <section className="search__container">
+            <ul className="search__list">
+              {searchResult?.map((product) => (
+                <li
+                  className="search__item"
+                  key={product.id}
+                  onClick={() => handleSearchItem(product)}
+                >
+                  {product.title}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </form>
         <article className="home__container">
           <h2 className="home__title">Products</h2>
           <article className="products__container">
@@ -154,14 +211,20 @@ const Home = ({ getAllCartProducts }) => {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    getAllCartProduct={getAllCartProducts}
+                    getAllProductsCart={getAllProductsCart}
+                    cartProducts={cartProducts}
+                    isEmpty={isEmpty}
+                    setIsEmpty={setIsEmpty}
                   />
                 ))
               : products?.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={product}
-                    getAllCartProduct={getAllCartProducts}
+                    getAllProductsCart={getAllProductsCart}
+                    cartProducts={cartProducts}
+                    isEmpty={isEmpty}
+                    setIsEmpty={setIsEmpty}
                   />
                 ))}
           </article>

@@ -12,27 +12,53 @@ import ProtectedRoutes from "./components/routes/ProtectedRoutes";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [cart, setCart] = useState();
+  const [cartProducts, setCartProducts] = useState();
+  const [isEmpty, setIsEmpty] = useState(true);
 
-  useEffect(() => {
-    getAllCartProducts();
-  }, [])
-  
-  const getAllCartProducts = () => {
+  const getAllProductsCart = () => {
     const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/cart";
     axios
       .get(URL, getConfig())
-      .then((res) => setCart(res.data.data.cart))
-      .catch((err) => console.log(err));
+      .then((res) => setCartProducts(res?.data.data.cart.products))
+      .catch((err) => setCartProducts());
   };
+
+  useEffect(() => {
+    getAllProductsCart();
+  }, []);
 
   return (
     <div className="App">
-      <Header getAllCartProducts={getAllCartProducts} cart={cart} />
+      <Header
+        getAllProductsCart={getAllProductsCart}
+        cartProducts={cartProducts}
+        isEmpty={isEmpty}
+        setIsEmpty={setIsEmpty}
+      />
       <Routes>
-        <Route path="/" element={<Home getAllCartProducts={getAllCartProducts} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              getAllProductsCart={getAllProductsCart}
+              cartProducts={cartProducts}
+              isEmpty={isEmpty}
+              setIsEmpty={setIsEmpty}
+            />
+          }
+        />
         <Route path="/login" element={<Login />} />
-        <Route path="/products/:id" element={<ProductDetails getAllCartProducts={getAllCartProducts} />} />
+        <Route
+          path="/products/:id"
+          element={
+            <ProductDetails
+              getAllProductsCart={getAllProductsCart}
+              cartProducts={cartProducts}
+              isEmpty={isEmpty}
+              setIsEmpty={setIsEmpty}
+            />
+          }
+        />
         <Route element={<ProtectedRoutes />}>
           <Route path="/purchases" element={<Purchases />} />
         </Route>
