@@ -78,7 +78,9 @@ const Login = () => {
   };
 
   const userLogin = () => {
-    alert("Welcome!, successful login");
+    alert(
+      'Welcome, you can buy products now!'
+    );
     navigate("/");
   };
 
@@ -107,11 +109,19 @@ const Login = () => {
           <i className="fa-solid fa-user"></i>
           <h2 className="login__title">Welcome</h2>
           <h3 className="login__user">
-            {isLogin ? `${firstName} ${lastName}` : "Guest_user"}
+            {isLogin ? `${firstName} ${lastName}` : "user1412"}
           </h3>
           <h3 className="login__subtitle">
             {isLogin ? "you are logged in" : "please login to your account"}
           </h3>
+          {!isLogin && (
+            <div className="login__user-div">
+              <p className="login__user-email">Email:</p>
+              <p className="login__user-email-value">alpha_user@gmail.com</p>
+              <p className="login__user-password">Password:</p>
+              <p className="login__user-password-value">123456</p>
+            </div>
+          )}
           <button className="islogin__btn" onClick={logOut}>
             Log out <i className="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
@@ -153,9 +163,12 @@ const Login = () => {
                 <input type="checkbox" name="remember" id="remember" />
                 <label htmlFor="remember">Remember me</label>
               </div>
-              <a href="#" className="form__forgot-password">
+              <p
+                className="form__forgot-password"
+                onClick={() => alert("coming soon...")}
+              >
                 Forgot password?
-              </a>
+              </p>
             </div>
             <button className="form__submit">LOG IN</button>
           </form>

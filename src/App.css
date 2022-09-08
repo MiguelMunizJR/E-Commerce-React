@@ -930,6 +930,37 @@ a {
   font-weight: 300;
 }
 
+.login__user-div {
+  margin-top: 1rem;
+  margin-bottom: -3rem;
+  padding: .5rem;
+  width: 80%;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: .9rem;
+  background-color: #1c2024;
+  border-radius: .5rem;
+}
+
+.login__user-email {
+  font-weight: 300;
+}
+
+.login__user-email-value {
+  font-weight: 600;
+}
+
+.login__user-password {
+  font-weight: 300;
+}
+
+.login__user-password-value {
+  font-weight: 600;
+}
+
 .islogin__btn {
   padding: 0.5rem;
   position: relative;
@@ -1060,6 +1091,7 @@ a {
   font-size: 0.9rem;
   font-weight: 400;
   color: #1b4f5e;
+  cursor: pointer;
 }
 
 .form__forgot-password:hover {

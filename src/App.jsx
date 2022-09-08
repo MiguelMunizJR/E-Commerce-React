@@ -25,6 +25,15 @@ function App() {
 
   useEffect(() => {
     getAllProductsCart();
+
+    const Obj = {
+      firstName: "Alpha",
+      lastName: "User",
+      email: "alpha_user@gmail.com",
+      password: "123456",
+      phone: "3322991188",
+      role: "admin",
+    };
   }, []);
 
   return (
