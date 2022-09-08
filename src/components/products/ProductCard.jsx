@@ -35,7 +35,7 @@ const ProductCard = ({ product, getAllProductsCart, setIsEmpty }) => {
         getAllProductsCart();
         setIsEmpty(false);
       })
-      .catch((err) => console.log(err));
+      .catch(() => getAllProductsCart());
   };
 
   return (

@@ -30,9 +30,7 @@ const ProductDetails = ({ getAllProductsCart, setIsEmpty }) => {
         setCategory(res.data.data.product.category);
         setQuantity(1);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => setQuantity(1));
     setQuantity(1);
     scrollToTop();
     getAllProductsCart();
@@ -58,9 +56,9 @@ const ProductDetails = ({ getAllProductsCart, setIsEmpty }) => {
         console.log(res.data);
         alert("product added to cart");
         setIsEmpty(false);
+        getAllProductsCart();
       })
-      .catch((err) => console.log(err));
-    getAllProductsCart();
+      .catch(() => getAllProductsCart());
     setQuantity(1);
   };
 

@@ -27,7 +27,7 @@ const ProductCartInfo = ({
             parseInt(product.price) * parseInt(product.productsInCart.quantity)
         );
       })
-      .catch((err) => console.log(err));
+      .catch(() => getAllProductsCart());
 
     if (product === undefined) {
       setIsEmpty(true);
