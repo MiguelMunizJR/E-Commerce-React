@@ -1,4 +1,5 @@
 import React from "react";
+import shared from './style/shared.css'
 
 const Footer = () => {
   return (

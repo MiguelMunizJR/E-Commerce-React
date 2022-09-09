@@ -1,0 +1,421 @@
+:root {
+  --color-primary: #252c35;
+  --color-secondary: #f8f8f8;
+  --color-buttons: #446c8f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Login */
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__card {
+  margin-top: 4.5rem;
+  width: 50%;
+  height: 25rem;
+  display: flex;
+  background-color: var(--color-secondary);
+  border-radius: 1rem;
+  box-shadow: 3px 3px 10px #aaa;
+}
+
+.login__logo {
+  width: 30rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  z-index: 100;
+}
+
+.login__logo-actived {
+  width: 45rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  z-index: 100;
+  position: absolute;
+  border-radius: 1rem;
+  z-index: 100;
+}
+
+.login__icon {
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+  font-size: 4.5rem;
+}
+
+.login__title {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.login__user {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.login__subtitle {
+  margin-top: 1.5rem;
+  width: 80%;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.login__user-div {
+  margin-top: 1rem;
+  margin-bottom: -3rem;
+  padding: 0.5rem;
+  width: 80%;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.9rem;
+  background-color: #1c2024;
+  border-radius: 0.5rem;
+}
+
+.login__user-email {
+  font-weight: 300;
+}
+
+.login__user-email-value {
+  font-weight: 600;
+}
+
+.login__user-password {
+  font-weight: 300;
+}
+
+.login__user-password-value {
+  font-weight: 600;
+}
+
+.islogin__btn {
+  padding: 0.5rem;
+  position: relative;
+  top: 2rem;
+  width: 10rem;
+  height: 2.5rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  color: #f5f5f5;
+  background-color: #942d2d;
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 8px #222;
+  cursor: pointer;
+}
+
+.islogin__btn:hover {
+  transform: scale(1.01);
+  box-shadow: 3px 3px 10px #222;
+  transition: 0.05s;
+}
+
+.login__form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-primary);
+  z-index: 10;
+}
+
+.form__form-title {
+  margin: 2rem 0 2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input {
+  margin-bottom: 2rem;
+  width: 20rem;
+  height: 2.3rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-primary);
+  outline: none;
+}
+
+.form__input:hover {
+  box-shadow: 1px 1px 8px #ccc;
+  transition: 0.3s;
+}
+
+.form__input:focus {
+  box-shadow: 1px 1px 8px #ccc;
+}
+
+.fa-envelope {
+  margin-right: -1.6rem;
+  position: relative;
+  font-size: 1.05rem;
+  color: #575e66;
+  z-index: 100;
+}
+
+.fa-lock {
+  margin-right: -1.5rem;
+  position: relative;
+  font-size: 1.05rem;
+  color: #575e66;
+  z-index: 100;
+}
+
+.fa-eye-slash {
+  margin-left: -1.7rem;
+  position: relative;
+  font-size: 1rem;
+  color: #575e66;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.fa-eye-slash:hover {
+  transform: scale(1.04);
+}
+
+.form__islogin {
+  margin: -1.5rem auto 1rem;
+  padding: 0.5rem;
+  width: 18rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f7cbcb;
+  border: 0.1rem solid #ecacac;
+}
+
+.form__islogin-title {
+  font-size: 0.9rem;
+  color: #944a4a;
+}
+
+.form__options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__remember {
+  font-size: 0.9rem;
+  font-weight: 400;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.form__forgot-password {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #1b4f5e;
+  cursor: pointer;
+}
+
+.form__forgot-password:hover {
+  color: #2e4c53;
+  transition: 0.05s;
+}
+
+.form__submit {
+  margin: 3rem auto;
+  width: 8rem;
+  height: 2.2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  background-color: var(--color-buttons);
+  border: 1px solid #406686;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 8px #111;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  transform: scale(1.03);
+  transition: 0.05s;
+}
+
+/* Purchases */
+.purchases {
+  margin-top: 4.5rem;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+}
+
+.purchases__card {
+  width: 80vw;
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.purchases__title {
+  margin-top: 8rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.purchases__container {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  width: 90%;
+}
+
+.purchases__container-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.purchases__face {
+  margin: 2rem 0;
+  font-size: 10rem;
+  color: #9191915e;
+}
+
+.purchases__container-message {
+  font-size: 1.3rem;
+  color: #9191915e;
+}
+
+.purchases__product-card {
+  margin-bottom: 5rem;
+  min-height: 12rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 1rem;
+  background-color: var(--color-secondary);
+}
+
+.purchases__product-header {
+  padding-left: 1.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.purchases__product-date {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.purchases__product-body {
+  width: 100%;
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.purchases__product-article {
+  padding-left: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.purchases__product-title {
+  min-width: 25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.purchases__product-quantity {
+  width: 3rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.3rem;
+}
+
+.purchases__product-price {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Loading */
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff9f;
+  z-index: 10000;
+}
+
+.loading__spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 6px solid #49a8df;
+  border-top-color: transparent;
+  animation: loading 0.7s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

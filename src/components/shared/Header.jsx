@@ -1,62 +1,91 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import shared from "./style/shared.css";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ProductCartInfo from "../products/ProductCartInfo";
 
-const Header = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
-  const [total, setTotal] = useState(0);
+const Header = ({
+  getAllProductsCart,
+  cartProducts,
+  isLogin,
+  total,
+  setTotal,
+  isEmpty,
+  setIsEmpty,
+  setIsLoading,
+}) => {
+  const navigate = useNavigate();
 
   const toggleCart = () => {
+    getAllProductsCart();
+
     const cartDisplay = document.querySelector(".cart");
     if (cartDisplay.style.display === "flex") {
       cartDisplay.style.display = "none";
     } else {
       cartDisplay.style.display = "flex";
-      getAllProductsCart();
     }
   };
 
-  useEffect(() => {
-    getAllProductsCart();
-  }, []);
-
+  // Funcion para hacer checkout del carrito de compras
   const handleCheckout = () => {
-    if (!cartProducts) {
-      alert("Your shopping cart is empty, add products");
+    if (isLogin) {
+      if (isEmpty) {
+        alert("Your shopping cart is empty, add products. 😕");
+        const cartDisplay = document.querySelector(".cart");
+        cartDisplay.style.display = "none";
+      } else {
+        setIsLoading(true);
+        const cartDisplay = document.querySelector(".cart");
+        const URL =
+          "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
+        const obj = {
+          street: "Green. 1456",
+          colony: "Southwest",
+          zipCode: 12645,
+          city: "USA",
+          references: "Some refences",
+        };
+
+        axios
+          .post(URL, obj, getConfig())
+          .then((res) => {
+            console.log(res.data);
+            getAllProductsCart();
+            setTotal(0);
+            alert("Thank you for your purchase! 😀");
+            setTimeout(() => setIsLoading(false), 500);
+            setIsEmpty(true);
+            cartDisplay.style.display = "none";
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+            getAllProductsCart();
+            cartDisplay.style.display = "none";
+          });
+      }
     } else {
       const cartDisplay = document.querySelector(".cart");
-      const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
-      const obj = {
-        street: "Green. 1456",
-        colony: "Southwest",
-        zipCode: 12645,
-        city: "USA",
-        references: "Some refences",
-      };
-
-      axios
-        .post(URL, obj, getConfig())
-        .then((res) => {
-          console.log(res.data);
-          getAllProductsCart();
-          alert("Gracias por su compra");
-          setTotal(0);
-          setIsEmpty(true);
-          cartDisplay.style.display = "none";
-        })
-        .catch((err) => {
-          console.log(err);
-          getAllProductsCart();
-          cartDisplay.style.display = "none";
-        });
+      alert("You must first login before purchasing. 😕");
+      cartDisplay.style.display = "none";
+      navigate("/login");
     }
   };
 
   return (
     <header className="header">
       <NavLink to="/">
-        <h1 className="header__logo">e-commerce</h1>
+        <h1
+          className="header__logo"
+          onClick={() => {
+            const cartDisplay = document.querySelector(".cart");
+            cartDisplay.style.display = "none";
+          }}
+        >
+          e-commerce
+        </h1>
       </NavLink>
       <nav className="header__nav">
         <ul className="header__list">
@@ -67,7 +96,13 @@ const Header = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
                 isActive ? "active__link" : "header__link"
               }
             >
-              <i className="fa-solid fa-user"></i>
+              <i
+                className="fa-solid fa-user"
+                onClick={() => {
+                  const cartDisplay = document.querySelector(".cart");
+                  cartDisplay.style.display = "none";
+                }}
+              ></i>
             </NavLink>
           </li>
           <li className="header__item">
@@ -77,7 +112,13 @@ const Header = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
                 isActive ? "active__link" : "header__link"
               }
             >
-              <i className="fa-solid fa-store"></i>
+              <i
+                className="fa-solid fa-store"
+                onClick={() => {
+                  const cartDisplay = document.querySelector(".cart");
+                  cartDisplay.style.display = "none";
+                }}
+              ></i>
             </NavLink>
           </li>
           <li className="header__item">
@@ -105,8 +146,6 @@ const Header = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
                   key={product.id}
                   product={product}
                   getAllProductsCart={getAllProductsCart}
-                  setTotal={setTotal}
-                  total={total}
                   isEmpty={isEmpty}
                   setIsEmpty={setIsEmpty}
                 />

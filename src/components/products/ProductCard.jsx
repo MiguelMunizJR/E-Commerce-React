@@ -1,4 +1,5 @@
 import React from "react";
+import products from "./style/products.css";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const scrollToTop = () => {
   });
 };
 
-const ProductCard = ({ product, getAllProductsCart, setIsEmpty }) => {
+const ProductCard = ({ product, setIsEmpty }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,21 +23,29 @@ const ProductCard = ({ product, getAllProductsCart, setIsEmpty }) => {
   // Agregar al carrito de compras
   const handleAddCart = (e) => {
     e.stopPropagation();
-    const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/cart";
-    const obj = {
-      id: product?.id,
-      quantity: 1,
-    };
+    const token = localStorage.getItem("token");
 
-    axios
-      .post(URL, obj, getConfig())
-      .then((res) => {
-        alert("product added to cart");
-        getAllProductsCart();
-        setIsEmpty(false);
-      })
-      .catch(() => getAllProductsCart());
+    if (token) {
+      const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/cart";
+      const obj = {
+        id: product?.id,
+        quantity: 1,
+      };
+
+      axios
+        .post(URL, obj, getConfig())
+        .then((res) => {
+          alert("product added to cart");
+          setIsEmpty(false);
+        })
+        .catch();
+    } else {
+      alert("You need to be logged in to add products to your cart. 😕");
+      navigate("/login");
+    }
   };
+
+  // console.log(product);
 
   return (
     <article className="product__card" onClick={handleClick}>

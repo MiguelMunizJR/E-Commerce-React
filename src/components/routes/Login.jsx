@@ -1,14 +1,8 @@
+import React, { useEffect, useState } from "react";
+import routes from './style/routes.css'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
-const isLoginStyle = {
-  width: "45rem",
-  position: "absolute",
-  borderRadius: "1rem",
-  zindex: "100",
-};
 
 const scrollToTop = () => {
   const container = document.querySelector("*");
@@ -18,41 +12,40 @@ const scrollToTop = () => {
   });
 };
 
-const Login = () => {
+const Login = ({ setIsLoading, isLogin, setIsLogin, setIsEmpty, setTotal }) => {
   const { register, handleSubmit, reset } = useForm();
   const [isCorrect, setIsCorrect] = useState();
-  const [isLogin, setIsLogin] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   /* Use Navigate */
   const navigate = useNavigate();
-
+  
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     const firstName = localStorage.getItem("first_name");
     const lastName = localStorage.getItem("last_name");
     const loginMessage = document.querySelector(".form__islogin");
     const logOutBtn = document.querySelector(".islogin__btn");
-
-    if (token) {
-      setIsLogin(true);
+    setTimeout(() => setIsLoading(false), 500);
+    
+    if (isLogin) {
       setFirstName(firstName);
       setLastName(lastName);
-    } else {
-      setIsLogin(false);
-    }
+    } 
 
     if (isCorrect === false) {
       loginMessage.style.display = "flex";
     } else {
-      if (isLogin) {
+      if (token) {
         loginMessage.style.display = "none";
         logOutBtn.style.display = "flex";
       }
     }
+
     scrollToTop();
-  }, [isLogin, isCorrect]);
+  }, [isCorrect]);
 
   const formSubmit = (data) => {
     const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/users/login";
@@ -63,8 +56,9 @@ const Login = () => {
         localStorage.setItem("first_name", res.data.data.user.firstName);
         localStorage.setItem("last_name", res.data.data.user.lastName);
         setIsCorrect(true);
-        setIsLogin(true);
         userLogin();
+        console.log(res.data);
+        setIsLogin(true);
       })
       .catch((err) => {
         console.log(err);
@@ -86,10 +80,13 @@ const Login = () => {
 
   const logOut = () => {
     const logOutBtn = document.querySelector(".islogin__btn");
-    setIsLogin(false);
     logOutBtn.style.display = "none";
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("last_name");
+    localStorage.removeItem("first_name");
+    setIsLogin(false);
+    setIsEmpty(true);
+    setTotal(0);
   };
 
   return (
@@ -103,10 +100,9 @@ const Login = () => {
       </div>
       <article className="login__card">
         <article
-          className="login__logo"
-          style={isLogin ? isLoginStyle : undefined}
+          className={isLogin ? "login__logo-actived" : "login__logo"}
         >
-          <i className="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user login__icon"></i>
           <h2 className="login__title">Welcome</h2>
           <h3 className="login__user">
             {isLogin ? `${firstName} ${lastName}` : "user1412"}
@@ -117,7 +113,7 @@ const Login = () => {
           {!isLogin && (
             <div className="login__user-div">
               <p className="login__user-email">Email:</p>
-              <p className="login__user-email-value">alpha_user@gmail.com</p>
+              <p className="login__user-email-value">alpha_user1@gmail.com</p>
               <p className="login__user-password">Password:</p>
               <p className="login__user-password-value">123456</p>
             </div>
@@ -137,6 +133,7 @@ const Login = () => {
                 id="email"
                 placeholder="Input your email"
                 {...register("email")}
+                required
               />
             </div>
             <div className="form__password">
@@ -147,6 +144,7 @@ const Login = () => {
                 id="password"
                 placeholder="Input your password"
                 {...register("password")}
+                required
               />
               <i
                 className="fa-solid fa-eye-slash"

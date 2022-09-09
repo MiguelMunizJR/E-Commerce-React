@@ -7,6 +7,7 @@ const ProtectedRoutes = () => {
   if (isLogged) {
     return <Outlet />;
   } else {
+    alert("You need to login to view your purchases");
     return <Navigate to="/login" />;
   }
 };

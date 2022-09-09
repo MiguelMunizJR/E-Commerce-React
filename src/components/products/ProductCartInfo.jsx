@@ -1,33 +1,17 @@
-import axios from "axios";
 import React, { useEffect } from "react";
+import products from "./style/products.css";
+import axios from "axios";
 import getConfig from "../../utils/getConfig";
 
-const ProductCartInfo = ({
-  product,
-  getAllProductsCart,
-  setTotal,
-  total,
-  setIsEmpty,
-}) => {
-  useEffect(() => {
-    setTotal(
-      total +
-        parseInt(product.price) * parseInt(product.productsInCart.quantity)
-    );
-  }, []);
-
+const ProductCartInfo = ({ product, getAllProductsCart, setIsEmpty }) => {
   const handleDeleteProduct = () => {
     const URL = `https://ecommerce-api-react.herokuapp.com/api/v1/cart/${product.id}`;
     axios
       .delete(URL, getConfig())
       .then(() => {
         getAllProductsCart();
-        setTotal(
-          total -
-            parseInt(product.price) * parseInt(product.productsInCart.quantity)
-        );
       })
-      .catch(() => getAllProductsCart());
+      .catch();
 
     if (product === undefined) {
       setIsEmpty(true);

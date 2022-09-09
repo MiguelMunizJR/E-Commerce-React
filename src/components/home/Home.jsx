@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import home from "./style/home.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../store/slices/products.slice.js.js";
@@ -12,7 +13,13 @@ const scrollToTop = () => {
   });
 };
 
-const Home = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
+const Home = ({
+  getAllProductsCart,
+  cartProducts,
+  isEmpty,
+  setIsEmpty,
+  setIsLoading,
+}) => {
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,6 +46,7 @@ const Home = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     switch (category) {
       case "all":
         setProductsCategory(products);
@@ -58,10 +66,14 @@ const Home = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
     }
     dispatch(getAllProducts());
     scrollToTop();
+    setTimeout(() => {
+      if (products !== undefined) {
+        setIsLoading(false);
+      }
+    }, 1200);
   }, [category]);
 
   const handleSearchItem = (item) => {
-    console.log(item);
     navigate(`/products/${item.id}`);
   };
 
@@ -211,20 +223,20 @@ const Home = ({ getAllProductsCart, cartProducts, isEmpty, setIsEmpty }) => {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    getAllProductsCart={getAllProductsCart}
                     cartProducts={cartProducts}
                     isEmpty={isEmpty}
                     setIsEmpty={setIsEmpty}
+                    setIsLoading={setIsLoading}
                   />
                 ))
               : products?.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={product}
-                    getAllProductsCart={getAllProductsCart}
                     cartProducts={cartProducts}
                     isEmpty={isEmpty}
                     setIsEmpty={setIsEmpty}
+                    setIsLoading={setIsLoading}
                   />
                 ))}
           </article>
