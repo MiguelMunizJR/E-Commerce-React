@@ -5,16 +5,14 @@ import Header from "./components/shared/Header";
 import Home from "./components/home/Home";
 import ProductDetails from "./components/products/ProductDetails";
 import Login from "./components/routes/Login";
-import Purchases from "./components/routes/Purchases";
+import Orders from "./components/routes/Orders";
 import Footer from "./components/shared/Footer";
 import ProtectedRoutes from "./components/routes/ProtectedRoutes";
 import { useEffect, useState } from "react";
 import Loading from "./components/routes/Loading";
 
 function App() {
-	const [cartProducts, setCartProducts] = useState();
-	const [isEmpty, setIsEmpty] = useState(true);
-	const [total, setTotal] = useState(0);
+	const [cartProducts, setCartProducts] = useState([]);
 	const [isLogin, setIsLogin] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -23,13 +21,7 @@ function App() {
 		axios
 			.get(URL, getConfig())
 			.then((res) => {
-				const products = res.data.data.cart.products;
-				setCartProducts(products);
-				const total = products?.reduce((acc, cv) => {
-					return Number(cv.price) * cv.productsInCart.quantity + acc;
-				}, 0);
-				setTotal(total);
-				setIsEmpty(false);
+				setCartProducts("");
 			})
 			.catch();
 	};
@@ -41,21 +33,6 @@ function App() {
 			getAllProductsCart();
 			setIsLogin(true);
 		}
-
-		// Crear usuario
-		// const URL = 'https://ecommerce-api-react.herokuapp.com/api/v1/users';
-		// const Obj = {
-		//   firstName: "Alpha",
-		//   lastName: "User",
-		//   email: "alpha_user100@gmail.com",
-		//   password: "123456",
-		//   phone: "3322991188",
-		//   role: "admin",
-		// };
-
-		// axios.post(URL, Obj)
-		// .then((res) => console.log(res.data))
-		// .catch((err) => console.log(err));
 	}, [isLogin]);
 
 	return (
@@ -64,10 +41,6 @@ function App() {
 			<Header
 				getAllProductsCart={getAllProductsCart}
 				cartProducts={cartProducts}
-				total={total}
-				setTotal={setTotal}
-				isEmpty={isEmpty}
-				setIsEmpty={setIsEmpty}
 				setIsLoading={setIsLoading}
 				isLogin={isLogin}
 			/>
@@ -78,8 +51,6 @@ function App() {
 						<Home
 							getAllProductsCart={getAllProductsCart}
 							cartProducts={cartProducts}
-							isEmpty={isEmpty}
-							setIsEmpty={setIsEmpty}
 							setIsLoading={setIsLoading}
 						/>
 					}
@@ -91,8 +62,6 @@ function App() {
 							setIsLoading={setIsLoading}
 							isLogin={isLogin}
 							setIsLogin={setIsLogin}
-							setIsEmpty={setIsEmpty}
-							setTotal={setTotal}
 						/>
 					}
 				/>
@@ -102,17 +71,14 @@ function App() {
 						<ProductDetails
 							getAllProductsCart={getAllProductsCart}
 							cartProducts={cartProducts}
-							isLogin={isLogin}
-							isEmpty={isEmpty}
-							setIsEmpty={setIsEmpty}
 							setIsLoading={setIsLoading}
 						/>
 					}
 				/>
 				<Route element={<ProtectedRoutes />}>
 					<Route
-						path="/purchases"
-						element={<Purchases setIsLoading={setIsLoading} />}
+						path="/orders"
+						element={<Orders setIsLoading={setIsLoading} />}
 					/>
 				</Route>
 			</Routes>
