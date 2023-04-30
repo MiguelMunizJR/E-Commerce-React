@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import getConfig from "../../utils/getConfig";
-import {scrollToTop} from "../../utils/scrollToTop";
+import getConfig from "../utils/getConfig";
+import {scrollToTop} from "../utils/scrollToTop";
 
 const Orders = ({ setIsLoading }) => {
 	const [orders, setOrders] = useState();

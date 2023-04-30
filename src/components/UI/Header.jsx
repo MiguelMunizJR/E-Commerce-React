@@ -25,39 +25,32 @@ const Header = ({
 	// Funcion para hacer checkout del carrito de compras
 	const handleCheckout = () => {
 		if (isLogin) {
-			if (isEmpty) {
-				alert("Your shopping cart is empty, add products. 😕");
-				const cartDisplay = document.querySelector(".cart");
-				cartDisplay.style.display = "none";
-			} else {
-				setIsLoading(true);
-				const cartDisplay = document.querySelector(".cart");
-				const URL =
-          "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
-				const obj = {
-					street: "Green. 1456",
-					colony: "Southwest",
-					zipCode: 12645,
-					city: "USA",
-					references: "Some refences",
-				};
+			setIsLoading(true);
+			const cartDisplay = document.querySelector(".cart");
+			const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
+			const obj = {
+				street: "Green. 1456",
+				colony: "Southwest",
+				zipCode: 12645,
+				city: "USA",
+				references: "Some refences",
+			};
 
-				axios
-					.post(URL, obj, getConfig())
-					.then((res) => {
-						console.log(res.data);
-						getAllProductsCart();
-						alert("Thank you for your purchase! 😀");
-						setTimeout(() => setIsLoading(false), 500);
-						cartDisplay.style.display = "none";
-						navigate("/");
-					})
-					.catch((err) => {
-						console.log(err);
-						getAllProductsCart();
-						cartDisplay.style.display = "none";
-					});
-			}
+			axios
+				.post(URL, obj, getConfig())
+				.then((res) => {
+					console.log(res.data);
+					getAllProductsCart();
+					alert("Thank you for your purchase! 😀");
+					setTimeout(() => setIsLoading(false), 500);
+					cartDisplay.style.display = "none";
+					navigate("/");
+				})
+				.catch((err) => {
+					console.log(err);
+					getAllProductsCart();
+					cartDisplay.style.display = "none";
+				});
 		} else {
 			const cartDisplay = document.querySelector(".cart");
 			alert("You must first login before purchasing. 😕");
@@ -125,22 +118,13 @@ const Header = ({
 				<article className="cart__header">
 					<h2 className="cart__title">Shopping cart</h2>
 					<section className="cart__container">
-						{isEmpty ? (
-							<div className="cart__container-div">
-								<i className="fa-regular fa-face-frown"></i>
-								<h4 className="cart__container-message">
-                  Your shopping cart is empty
-								</h4>
-							</div>
-						) : (
-							cartProducts?.map((product) => (
-								<ProductCartInfo
-									key={product.id}
-									product={product}
-									getAllProductsCart={getAllProductsCart}
-								/>
-							))
-						)}
+						{cartProducts?.map((product) => (
+							<ProductCartInfo
+								key={product.id}
+								product={product}
+								getAllProductsCart={getAllProductsCart}
+							/>
+						))}
 					</section>
 				</article>
 				<article className="cart__footer">

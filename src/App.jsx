@@ -1,15 +1,17 @@
+import { useEffect, useState } from "react";
+import "./styles/UI.css";
+import "./styles/products.css";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import getConfig from "./utils/getConfig";
-import Header from "./components/shared/Header";
-import Home from "./components/home/Home";
+import Header from "./components/UI/Header";
+import Home from "./components/UI/Home";
 import ProductDetails from "./components/products/ProductDetails";
-import Login from "./components/routes/Login";
-import Orders from "./components/routes/Orders";
-import Footer from "./components/shared/Footer";
-import ProtectedRoutes from "./components/routes/ProtectedRoutes";
-import { useEffect, useState } from "react";
-import Loading from "./components/routes/Loading";
+import Login from "./components/Login";
+import Orders from "./components/Orders";
+import Footer from "./components/UI/Footer";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import Loading from "./components/Loading";
 
 function App() {
 	const [cartProducts, setCartProducts] = useState([]);
