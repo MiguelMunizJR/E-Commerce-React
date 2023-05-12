@@ -69,7 +69,7 @@ function App() {
 					}
 				/>
 				<Route
-					path={ROUTES_PATH.PRODUCT}
+					path={ROUTES_PATH.PRODUCT_ID}
 					element={
 						<ProductDetails
 							getAllProductsCart={getAllProductsCart}
