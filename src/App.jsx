@@ -20,7 +20,7 @@ function App() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getAllProductsCart = () => {
-		const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/cart";
+		const URL = "https://ecommerce-api-express-2dx2.onrender.com/api/v1/cart";
 		axios
 			.get(URL, getConfig())
 			.then((res) => {
