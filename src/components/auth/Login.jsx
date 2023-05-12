@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {scrollToTop} from "../utils/scrollToTop";
+import {scrollToTop} from "../../utils/scrollToTop";
 
 const Login = ({ setIsLoading, isLogin, setIsLogin }) => {
 	const { register, handleSubmit, reset } = useForm();

@@ -7,11 +7,12 @@ import getConfig from "./utils/getConfig";
 import Header from "./components/UI/Header";
 import Home from "./components/UI/Home";
 import ProductDetails from "./components/products/ProductDetails";
-import Login from "./components/Login";
+import Login from "./components/auth/Login";
 import Orders from "./components/Orders";
 import Footer from "./components/UI/Footer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Loading from "./components/Loading";
+import { ROUTES_PATH } from "./Constants";
 
 function App() {
 	const [cartProducts, setCartProducts] = useState([]);
@@ -48,7 +49,7 @@ function App() {
 			/>
 			<Routes>
 				<Route
-					path="/"
+					path={ROUTES_PATH.HOME}
 					element={
 						<Home
 							getAllProductsCart={getAllProductsCart}
@@ -58,7 +59,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/login"
+					path={ROUTES_PATH.LOGIN}
 					element={
 						<Login
 							setIsLoading={setIsLoading}
@@ -68,7 +69,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/products/:id"
+					path={ROUTES_PATH.PRODUCT}
 					element={
 						<ProductDetails
 							getAllProductsCart={getAllProductsCart}
@@ -79,7 +80,7 @@ function App() {
 				/>
 				<Route element={<ProtectedRoutes />}>
 					<Route
-						path="/orders"
+						path={ROUTES_PATH.ORDERS}
 						element={<Orders setIsLoading={setIsLoading} />}
 					/>
 				</Route>
