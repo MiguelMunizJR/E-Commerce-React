@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../store/slices/products.slice.js.js";
 import ProductCard from "../products/ProductCard.jsx";
 import {scrollToTop} from "../../utils/scrollToTop";
+import useRequest from "../../hooks/useRequest.js";
 
 const Home = ({
-	getAllProductsCart,
-	cartProducts,
+	// getAllProductsCart,
+	// cartProducts,
 	setIsLoading,
 }) => {
-	const products = useSelector((state) => state.products);
-	const dispatch = useDispatch();
+	const {data} = useRequest();
+	console.log(data);
+	// const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [productsCategory, setProductsCategory] = useState();
 	const [category, setCategory] = useState();
@@ -54,7 +56,7 @@ const Home = ({
 			setProductsCategory(products);
 			break;
 		}
-		dispatch(getAllProducts());
+		// dispatch(getAllProducts());
 		scrollToTop();
 		if (products !== undefined) {
 			setIsLoading(false);

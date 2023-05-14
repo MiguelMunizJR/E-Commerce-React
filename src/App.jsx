@@ -15,25 +15,25 @@ import Loading from "./components/Loading";
 import { ROUTES_PATH } from "./Constants";
 
 function App() {
-	const [cartProducts, setCartProducts] = useState([]);
+	// const [cartProducts, setCartProducts] = useState([]);
 	const [isLogin, setIsLogin] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const getAllProductsCart = () => {
-		const URL = "https://ecommerce-api-express-2dx2.onrender.com/api/v1/cart";
-		axios
-			.get(URL, getConfig())
-			.then((res) => {
-				setCartProducts("");
-			})
-			.catch();
-	};
+	// const getAllProductsCart = () => {
+	// const URL = "https://ecommerce-api-express-2dx2.onrender.com/api/v1/products";
+	// axios
+	// 	.get(URL)
+	// 	.then((res) => {
+	// 		console.log(res?.data);
+	// 	})
+	// 	.catch();
+	// // };
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 
 		if (token) {
-			getAllProductsCart();
+			// getAllProductsCart();
 			setIsLogin(true);
 		}
 	}, [isLogin]);
@@ -42,8 +42,8 @@ function App() {
 		<div className="App">
 			<Loading isLoading={isLoading} />
 			<Header
-				getAllProductsCart={getAllProductsCart}
-				cartProducts={cartProducts}
+				// getAllProductsCart={getAllProductsCart}
+				// cartProducts={cartProducts}
 				setIsLoading={setIsLoading}
 				isLogin={isLogin}
 			/>
@@ -52,8 +52,8 @@ function App() {
 					path={ROUTES_PATH.HOME}
 					element={
 						<Home
-							getAllProductsCart={getAllProductsCart}
-							cartProducts={cartProducts}
+							// getAllProductsCart={getAllProductsCart}
+							// cartProducts={cartProducts}
 							setIsLoading={setIsLoading}
 						/>
 					}
@@ -72,8 +72,8 @@ function App() {
 					path={ROUTES_PATH.PRODUCT_ID}
 					element={
 						<ProductDetails
-							getAllProductsCart={getAllProductsCart}
-							cartProducts={cartProducts}
+							// getAllProductsCart={getAllProductsCart}
+							// cartProducts={cartProducts}
 							setIsLoading={setIsLoading}
 						/>
 					}
