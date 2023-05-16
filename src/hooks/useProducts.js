@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ROUTES_PATH, URL_API } from "../Constants";
 
-const useRequest = () => {
-	const [data, setData] = useState(null);
+const useProducts = () => {
+	const [products, setProducts] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const URL = "https://ecommerce-api-express-2dx2.onrender.com/api/v1/products";
+	const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}`;
 
 	const getAllProducts = async () => {
 		await axios.get(URL)
 			.then((res) => {
-				setData(res?.data);
+				setProducts(res?.data);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -24,7 +25,7 @@ const useRequest = () => {
 	}, []);
   
 
-	return { data, loading, error, getAllProducts };
+	return { products, loading, error, getAllProducts };
 };
 
-export default useRequest;
+export default useProducts;

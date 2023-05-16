@@ -37,23 +37,23 @@ const ProductCard = ({ product }) => {
 
 	return (
 		<article className="product__card" onClick={handleClick}>
-			<div className="product__header">
+			<header className="product__header">
 				<img
-					src={`${product.productImgs[0]}`}
+					src={product?.image}
 					alt=""
 					className="product__img"
 				/>
-			</div>
-			<h2 className="product__title">{product.title}</h2>
-			<div className="product__footer">
+			</header>
+			<h2 className="product__title">{product?.title}</h2>
+			<footer className="product__footer">
 				<div className="product__price">
 					<p className="product__price-title">Price</p>
-					<span className="product__price-value">$ {product.price}</span>
+					<span className="product__price-value">$ {product?.price}</span>
 				</div>
 				<button className="product__btn" onClick={handleAddCart}>
 					<i className="fa-solid fa-cart-shopping"></i>
 				</button>
-			</div>
+			</footer>
 		</article>
 	);
 };

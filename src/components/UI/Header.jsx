@@ -2,13 +2,9 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { NavLink, useNavigate } from "react-router-dom";
 import ProductCartInfo from "../products/ProductCartInfo";
+import { ROUTES_PATH } from "../../Constants";
 
-const Header = ({
-	getAllProductsCart,
-	cartProducts,
-	isLogin,
-	setIsLoading,
-}) => {
+const Header = ({ getAllProductsCart, cartProducts, isLogin }) => {
 	const navigate = useNavigate();
 
 	const toggleCart = () => {
@@ -22,10 +18,9 @@ const Header = ({
 		}
 	};
 
-	// Funcion para hacer checkout del carrito de compras
+	// Funcion para hacer check-out del carrito de compras
 	const handleCheckout = () => {
 		if (isLogin) {
-			setIsLoading(true);
 			const cartDisplay = document.querySelector(".cart");
 			const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
 			const obj = {
@@ -42,7 +37,6 @@ const Header = ({
 					console.log(res.data);
 					getAllProductsCart();
 					alert("Thank you for your purchase! 😀");
-					setTimeout(() => setIsLoading(false), 500);
 					cartDisplay.style.display = "none";
 					navigate("/");
 				})
@@ -61,49 +55,36 @@ const Header = ({
 
 	return (
 		<header className="header">
-			<NavLink to="/">
-				<h1
-					className="header__logo"
-					onClick={() => {
-						const cartDisplay = document.querySelector(".cart");
-						cartDisplay.style.display = "none";
-					}}
-				>
-          e-commerce
-				</h1>
-			</NavLink>
+			<div>
+				<NavLink to={ROUTES_PATH.HOME}>
+					<h1 className="header__logo">e-commerce</h1>
+				</NavLink>
+			</div>
 			<nav className="header__nav">
 				<ul className="header__list">
 					<li className="header__item">
+						{
+							
+						}
 						<NavLink
-							to="/login"
+							to={ROUTES_PATH.LOGIN}
 							className={({ isActive }) =>
-								isActive ? "active__link" : "header__link"
+								isActive ? "active__link" : "header__item"
 							}
 						>
-							<i
-								className="fa-solid fa-user"
-								onClick={() => {
-									const cartDisplay = document.querySelector(".cart");
-									cartDisplay.style.display = "none";
-								}}
-							></i>
+							<i className="fa-solid fa-user"></i>
+							<p>Account</p>
 						</NavLink>
 					</li>
 					<li className="header__item">
 						<NavLink
-							to="/purchases"
+							to={ROUTES_PATH.ORDERS}
 							className={({ isActive }) =>
-								isActive ? "active__link" : "header__link"
+								isActive ? "active__link" : "header__item"
 							}
 						>
-							<i
-								className="fa-solid fa-store"
-								onClick={() => {
-									const cartDisplay = document.querySelector(".cart");
-									cartDisplay.style.display = "none";
-								}}
-							></i>
+							<i className="fa-solid fa-store"></i>
+							<p>Orders</p>
 						</NavLink>
 					</li>
 					<li className="header__item">
@@ -111,6 +92,7 @@ const Header = ({
 							className="fa-solid fa-cart-shopping header__link"
 							onClick={toggleCart}
 						></i>
+						<p>Cart</p>
 					</li>
 				</ul>
 			</nav>

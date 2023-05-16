@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import "./styles/UI.css";
 import "./styles/products.css";
-import { Route, Routes } from "react-router-dom";
-import axios from "axios";
-import getConfig from "./utils/getConfig";
 import Header from "./components/UI/Header";
 import Home from "./components/UI/Home";
 import ProductDetails from "./components/products/ProductDetails";
@@ -13,38 +12,30 @@ import Footer from "./components/UI/Footer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Loading from "./components/Loading";
 import { ROUTES_PATH } from "./Constants";
+import useProducts from "./hooks/useProducts";
+import Register from "./components/auth/Register";
 
 function App() {
-	// const [cartProducts, setCartProducts] = useState([]);
 	const [isLogin, setIsLogin] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
 
-	// const getAllProductsCart = () => {
-	// const URL = "https://ecommerce-api-express-2dx2.onrender.com/api/v1/products";
-	// axios
-	// 	.get(URL)
-	// 	.then((res) => {
-	// 		console.log(res?.data);
-	// 	})
-	// 	.catch();
-	// // };
+	const { data } = useProducts();
+	console.log(data);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
+		// const token = localStorage.getItem("token");
 
-		if (token) {
-			// getAllProductsCart();
-			setIsLogin(true);
-		}
+		// if (token) {
+		// getAllProductsCart()
+		// 	setIsLogin(true);
+		// }
 	}, [isLogin]);
 
 	return (
 		<div className="App">
-			<Loading isLoading={isLoading} />
+			<Loading />
 			<Header
 				// getAllProductsCart={getAllProductsCart}
 				// cartProducts={cartProducts}
-				setIsLoading={setIsLoading}
 				isLogin={isLogin}
 			/>
 			<Routes>
@@ -54,7 +45,6 @@ function App() {
 						<Home
 							// getAllProductsCart={getAllProductsCart}
 							// cartProducts={cartProducts}
-							setIsLoading={setIsLoading}
 						/>
 					}
 				/>
@@ -62,7 +52,15 @@ function App() {
 					path={ROUTES_PATH.LOGIN}
 					element={
 						<Login
-							setIsLoading={setIsLoading}
+							isLogin={isLogin}
+							setIsLogin={setIsLogin}
+						/>
+					}
+				/>
+				<Route
+					path={ROUTES_PATH.REGISTER}
+					element={
+						<Register
 							isLogin={isLogin}
 							setIsLogin={setIsLogin}
 						/>
@@ -74,14 +72,13 @@ function App() {
 						<ProductDetails
 							// getAllProductsCart={getAllProductsCart}
 							// cartProducts={cartProducts}
-							setIsLoading={setIsLoading}
 						/>
 					}
 				/>
 				<Route element={<ProtectedRoutes />}>
 					<Route
 						path={ROUTES_PATH.ORDERS}
-						element={<Orders setIsLoading={setIsLoading} />}
+						element={<Orders />}
 					/>
 				</Route>
 			</Routes>

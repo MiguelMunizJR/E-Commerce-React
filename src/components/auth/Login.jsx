@@ -3,18 +3,18 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {scrollToTop} from "../../utils/scrollToTop";
+import { ROUTES_PATH, URL_API } from "../../Constants";
 
-const Login = ({ setIsLoading, isLogin, setIsLogin }) => {
+const Login = ({ isLogin, setIsLogin }) => {
 	const { register, handleSubmit, reset } = useForm();
 	const [isCorrect, setIsCorrect] = useState();
 	const [isVisible, setIsVisible] = useState(false);
 	const [firstName, setFirstName] = useState();
 	const [lastName, setLastName] = useState();
-	/* Use Navigate */
+
 	const navigate = useNavigate();
   
 	useEffect(() => {
-		setIsLoading(true);
 		const token = localStorage.getItem("token");
 		const firstName = localStorage.getItem("first_name");
 		const lastName = localStorage.getItem("last_name");
@@ -40,13 +40,12 @@ const Login = ({ setIsLoading, isLogin, setIsLogin }) => {
 	}, [isCorrect]);
 
 	const formSubmit = (data) => {
-		const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/users/login";
+		const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
+
 		axios
 			.post(URL, data)
 			.then((res) => {
 				localStorage.setItem("token", res.data.data.token);
-				localStorage.setItem("first_name", res.data.data.user.firstName);
-				localStorage.setItem("last_name", res.data.data.user.lastName);
 				setIsCorrect(true);
 				userLogin();
 				console.log(res.data);
