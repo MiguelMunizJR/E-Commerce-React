@@ -22,12 +22,12 @@ function App() {
 	console.log(data);
 
 	useEffect(() => {
-		// const token = localStorage.getItem("token");
+		const token = localStorage.getItem("token");
 
-		// if (token) {
-		// getAllProductsCart()
-		// 	setIsLogin(true);
-		// }
+		if (token) {
+			// getAllProductsCart()
+			setIsLogin(true);
+		}
 	}, [isLogin]);
 
 	return (
