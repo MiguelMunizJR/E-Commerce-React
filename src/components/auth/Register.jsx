@@ -85,6 +85,7 @@ const Login = ({ isLogin, setIsLogin }) => {
         <div className="productinfo__return-circle"></div>
         <p className="productinfo__return-product">Sign up</p>
       </div>
+
       <article className="login__card">
         <article className={isLogin ? "login__logo-actived" : "login__logo"}>
           <i className="fa-solid fa-user login__icon"></i>
@@ -97,8 +98,28 @@ const Login = ({ isLogin, setIsLogin }) => {
         <article className="login__form">
           <h2 className="form__form-title">Sign up</h2>
           <form className="form" onSubmit={handleSubmit(formSubmit)}>
-            <div className="form__email">
-              <i className="fa-solid fa-envelope"></i>
+            <div className="form__input-div form__firstname">
+              <label htmlFor="first_name">First Name</label>
+              <input
+                type="text"
+                className="form__input"
+                id="first_name"
+                placeholder="Alberto"
+                {...register("firstName")}
+              />
+            </div>
+            <div className="form__input-div form__last_name">
+              <label htmlFor="last_name">Last Name</label>
+              <input
+                type="text"
+                className="form__input"
+                id="last_name"
+                placeholder="Lopez"
+                {...register("lastName")}
+              />
+            </div>
+            <div className="form__input-div form__email">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form__input"
@@ -108,8 +129,19 @@ const Login = ({ isLogin, setIsLogin }) => {
                 required
               />
             </div>
-            <div className="form__password">
-              <i className="fa-solid fa-lock"></i>
+            <div className="form__input-div form__email">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                className="form__input"
+                id="email"
+                placeholder="Input your email"
+                {...register("email")}
+                required
+              />
+            </div>
+            <div className="form__input-div form__password">
+              <label htmlFor="password">Password</label>
               <input
                 type={isVisible ? "text" : "password"}
                 className="form__input"
