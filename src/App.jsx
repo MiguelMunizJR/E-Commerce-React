@@ -10,16 +10,11 @@ import Login from "./components/auth/Login";
 import Orders from "./components/Orders";
 import Footer from "./components/UI/Footer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import Loading from "./components/Loading";
 import { ROUTES_PATH } from "./Constants";
-import useProducts from "./hooks/useProducts";
 import Register from "./components/auth/Register";
 
 function App() {
 	const [isLogin, setIsLogin] = useState(false);
-
-	const { data } = useProducts();
-	console.log(data);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -32,7 +27,6 @@ function App() {
 
 	return (
 		<div className="App">
-			<Loading />
 			<Header
 				// getAllProductsCart={getAllProductsCart}
 				// cartProducts={cartProducts}

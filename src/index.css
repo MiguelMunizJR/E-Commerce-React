@@ -1,7 +1,9 @@
 :root {
   --color-primary: #252c35;
   --color-secondary: #f8f8f8;
-  --color-buttons: #446c8f;
+  
+  --color-button: #1b85e9;
+  --color-button-hover: #2a96fc;
 }
 
 * {
@@ -16,7 +18,7 @@ a {
 
 .App {
   width: 100%;
-  height: auto;
+  min-height: 100vh;
   font-family: "Montserrat", sans-serif;
   background-color: #fff;
 }
@@ -24,164 +26,61 @@ a {
 /* Login */
 .login {
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.login__card {
-  margin-top: 4.5rem;
-  width: 50%;
-  height: 25rem;
-  display: flex;
-  background-color: var(--color-secondary);
-  border-radius: 1rem;
-  box-shadow: 3px 3px 10px #aaa;
-}
-
-.login__logo {
-  width: 30rem;
-  height: 25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: var(--color-secondary);
-  background-color: var(--color-primary);
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  z-index: 100;
-}
-
-.login__logo-actived {
-  width: 45rem;
-  height: 25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: var(--color-secondary);
-  background-color: var(--color-primary);
-  z-index: 100;
-  position: absolute;
-  border-radius: 1rem;
-  z-index: 100;
-}
-
-.login__icon {
-  margin-top: -3rem;
-  margin-bottom: 1rem;
-  font-size: 4.5rem;
 }
 
 .login__title {
-  font-size: 2rem;
-  font-weight: 300;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.login__user {
-  margin-top: 1rem;
-  font-size: 1rem;
-}
-
-.login__subtitle {
-  margin-top: 1.5rem;
-  width: 80%;
-  font-size: 1.1rem;
-  font-weight: 300;
-}
-
-.login__user-div {
-  margin-top: 1rem;
-  margin-bottom: -3rem;
-  padding: 0.5rem;
-  width: 80%;
-  height: 6rem;
+.login__card {
+  margin: 5rem 0;
+  width: max-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 0.9rem;
-  background-color: #1c2024;
-  border-radius: 0.5rem;
-}
-
-.login__user-email {
-  font-weight: 300;
-}
-
-.login__user-email-value {
-  font-weight: 600;
-}
-
-.login__user-password {
-  font-weight: 300;
-}
-
-.login__user-password-value {
-  font-weight: 600;
-}
-
-.islogin__btn {
-  padding: 0.5rem;
-  position: relative;
-  top: 2rem;
-  width: 10rem;
-  height: 2.5rem;
-  display: none;
-  align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  font-size: 1rem;
-  color: #f5f5f5;
-  background-color: #942d2d;
-  border: none;
-  border-radius: 0.3rem;
-  box-shadow: 2px 2px 8px #222;
-  cursor: pointer;
-}
-
-.islogin__btn:hover {
-  transform: scale(1.01);
-  box-shadow: 3px 3px 10px #222;
-  transition: 0.05s;
-}
-
-.login__form {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  color: var(--color-primary);
-  z-index: 10;
-}
-
-.form__form-title {
-  margin: 2rem 0 2rem;
-  font-size: 1.6rem;
-  font-weight: 500;
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form__input-div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.form__input-div label {
+  color: #444;
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+.form__input-div label span {
+  padding-left: 3px;
+  color: #db2a2a;
 }
 
 .form__input {
-  margin-bottom: 2rem;
+  padding: 10px;
   width: 20rem;
-  height: 2.3rem;
-  border: 0.1rem solid #ddd;
-  border-radius: 0.5rem;
-  text-align: center;
+  height: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   font-size: 1rem;
-  font-weight: 400;
-  color: var(--color-primary);
+  font-weight: 500;
+  background-color: #f7f7f7;
+  color: #444;
   outline: none;
 }
 
@@ -194,93 +93,31 @@ a {
   box-shadow: 1px 1px 8px #ccc;
 }
 
-.fa-envelope {
-  margin-right: -1.6rem;
-  position: relative;
-  font-size: 1.05rem;
-  color: #575e66;
-  z-index: 100;
+.form__birthday {
+  margin: 0 auto;
+  width: 10rem;
 }
 
-.fa-lock {
-  margin-right: -1.5rem;
-  position: relative;
-  font-size: 1.05rem;
-  color: #575e66;
-  z-index: 100;
-}
-
-.fa-eye-slash {
-  margin-left: -1.7rem;
-  position: relative;
-  font-size: 1rem;
-  color: #575e66;
-  cursor: pointer;
-  z-index: 100;
-}
-
-.fa-eye-slash:hover {
-  transform: scale(1.04);
-}
-
-.form__islogin {
-  margin: -1.5rem auto 1rem;
-  padding: 0.5rem;
-  width: 18rem;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #f7cbcb;
-  border: 0.1rem solid #ecacac;
-}
-
-.form__islogin-title {
-  font-size: 0.9rem;
-  color: #944a4a;
-}
-
-.form__options {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form__remember {
-  font-size: 0.9rem;
-  font-weight: 400;
-  display: flex;
-  gap: 0.3rem;
-}
-
-.form__forgot-password {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #1b4f5e;
-  cursor: pointer;
-}
-
-.form__forgot-password:hover {
-  color: #2e4c53;
-  transition: 0.05s;
+.birthday {
+  width: 10rem;
 }
 
 .form__submit {
-  margin: 3rem auto;
-  width: 8rem;
-  height: 2.2rem;
-  font-size: 0.8rem;
+  margin-top: 1.5rem;
+  height: 2.8rem;
+  font-size: 1.1rem;
   font-weight: 500;
   color: var(--color-secondary);
-  background-color: var(--color-buttons);
-  border: 1px solid #406686;
-  border-radius: 0.5rem;
-  box-shadow: 3px 3px 8px #111;
+  background-color: var(--color-button);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 3px 3px 8px #8a8a8ac5;
   cursor: pointer;
 }
 
 .form__submit:hover {
-  transform: scale(1.03);
-  transition: 0.05s;
+  box-shadow: 4px 4px 10px #757575c5;
+  transition: .2s ease-in-out;
 }
 
 /* Purchases */
