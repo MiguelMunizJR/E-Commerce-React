@@ -55,29 +55,31 @@ const Login = ({ isLogin }) => {
 				<p className="productinfo__return-product">Sign up</p>
 			</div>
 
+			<h2 className="register__title"><i className="fa-solid fa-user"></i>Sign up</h2>
 			<article className="login__card">
-				<h2 className="login__title">Sign up</h2>
 				<form className="form" onSubmit={handleSubmit(formSubmit)}>
 					{/* First Name */}
 					<div className="form__input-div form__firstname">
-						<label htmlFor="first_name">First Name</label>
+						<label htmlFor="first_name">First Name<span>*</span></label>
 						<input
 							type="text"
 							className="form__input"
 							id="first_name"
 							placeholder="Alberto"
 							{...register("firstName")}
+							required
 						/>
 					</div>
 					{/* Last Name */}
 					<div className="form__input-div form__last_name">
-						<label htmlFor="last_name">Last Name</label>
+						<label htmlFor="last_name">Last Name<span>*</span></label>
 						<input
 							type="text"
 							className="form__input"
 							id="last_name"
 							placeholder="Lopez"
 							{...register("lastName")}
+							required
 						/>
 					</div>
 					{/* Email */}
@@ -106,23 +108,25 @@ const Login = ({ isLogin }) => {
 					</div>
 					{/* Phone Number */}
 					<div className="form__input-div form__phone-number">
-						<label htmlFor="phone_number">Phone</label>
+						<label htmlFor="phone_number">Phone<span>*</span></label>
 						<input
 							type="tel"
 							className="form__input"
 							id="phone_number"
 							placeholder="+52 XXXXXXXXXX"
 							{...register("phone")}
+							required
 						/>
 					</div>
 					{/* Birthday */}
 					<div className="form__input-div form__birthday">
-						<label htmlFor="birthday">Birthday</label>
+						<label htmlFor="birthday">Birthday<span>*</span></label>
 						<input
 							type="date"
 							className="form__input birthday"
 							id="birthday"
 							{...register("birthday")}
+							required
 						/>
 					</div>
 					<button className="form__submit">Sign up</button>
