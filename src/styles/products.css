@@ -306,14 +306,17 @@ a {
 
 /* Cart product */
 .cart__product-card {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-  padding-right: 1rem;
+  padding: 10px 8px 10px 10px;
   min-height: 9rem;
   display: flex;
   flex-direction: column;
   color: #555;
-  border-bottom: 0.1rem solid #ddd;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.cart__product-card:nth-child(2) {
+  border-top: 1px solid #eee;
 }
 
 .cart__product-header {
@@ -321,63 +324,82 @@ a {
   flex-direction: column;
 }
 
-.cart__product-brand {
-  margin-bottom: 0.3rem;
+.cart__product-container {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
-.cart__product-brand-title {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #999;
+.cart__product-img {
+  width: 5rem;
+}
+
+.cart__product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.cart__product-icon {
+  margin: 0 5px 8px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Icono de basura */
 .fa-trash-can {
-  font-size: 1rem;
+  font-size: .95rem;
   color: #dd7070;
   cursor: pointer;
 }
 
 .fa-trash-can:hover {
-  color: #cc5f5f;
-  transition: 0.3s;
+  color: #df4e4e;
+  transition: .2s ease-in-out;
+}
+
+.cart__product-title-div {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart__product-title {
-  margin-top: 0.2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .cart__product-quantity {
-  margin-top: 0.7rem;
-  width: 3.5rem;
+  margin-top: .5rem;
+  width: 2.5rem;
   height: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: .85rem;
   font-weight: 500;
-  border-radius: 0.2rem;
-  border: 0.1rem solid #ccc;
+  border-radius: 3px;
+  border: 1px solid #ddd;
 }
 
 .cart__product-footer {
-  margin-top: 1rem;
+  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 5px;
 }
 
 .cart__product-total {
-  font-size: 0.9rem;
+  font-size: .9rem;
   font-weight: 500;
-  color: #999;
+  color: var(--color-button-primary);
+  opacity: .8;
 }
 
 .cart__product-value {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: .9rem;
+  font-weight: 500;
+  color: #666;
 }

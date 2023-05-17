@@ -130,26 +130,25 @@ const Header = ({ isLogin }) => {
 					<p>Cart</p>
 				</button>
 			</nav>
+			{/* Cart section */}
 			<section className="cart">
-				<article className="cart__header">
-					<h2 className="cart__title">Shopping cart</h2>
-					<section className="cart__container">
-						{cart?.products?.map((product) => (
-							<ProductCartInfo
-								key={product.id}
-								product={product}
-								getAllProductsCart={getAllProductsCart}
-							/>
-						))}
-					</section>
+				<h2 className="cart__title">Shopping cart</h2>
+				<article className="cart__container">
+					{cart?.products?.map((product) => (
+						<ProductCartInfo
+							key={product.id}
+							product={product}
+							getAllProductsCart={getAllProductsCart}
+						/>
+					))}
 				</article>
-				<article className="cart__footer">
+				<footer className="cart__footer">
 					<p className="cart__footer-total">Total:</p>
-					<span className="cart__footer-value">{`$ ${cart?.total}`}</span>
+					<span className="cart__footer-value">{`$${cart?.total}`}</span>
 					<button className="cart__footer-btn" onClick={"handleCheckout"}>
             Checkout<i className="fa-solid fa-bag-shopping"></i>
 					</button>
-				</article>
+				</footer>
 			</section>
 		</header>
 	);
