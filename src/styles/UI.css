@@ -355,7 +355,7 @@ a {
   padding: 0 40px 0 20px;
   font-size: 1rem;
   color: #666;
-  background-color: #f8f8f8;
+  background-color: #f9f9f9;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -378,18 +378,18 @@ a {
 }
 
 .search__container {
-  max-height: fit-content;
+  width: 34%;
+  max-height: 17rem;
   position: absolute;
-  top: 8.4rem;
+  top: 8.2rem;
   display: none;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f9f9;
   border: 1px solid #eee;
-  border-radius: 0.2rem;
-  box-shadow: 1px 1px 3px #ccc;
-  z-index: 100;
+  background-color: #fff;
+  border-radius: 3px;
+  overflow-y: auto;
+  box-shadow: 1px 1px 3px #7777777e;
+  z-index: 500;
 }
 
 .search__list {
@@ -399,20 +399,21 @@ a {
 }
 
 .search__item {
-  padding-left: 2rem;
-  width: 39rem;
-  height: 2.3rem;
+  padding: 10px 1rem;
+  width: 100%;
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
   border-bottom: 1px solid #ddd;
   cursor: pointer;
+  z-index: 500;
 }
 
 .search__item:hover {
-  font-size: 0.96rem;
-  background-color: #f2f2f2;
+  background-color: #f7f7f7;
+  transition: .1s ease-out;
 }
 
 .home__container {
@@ -442,24 +443,25 @@ a {
 
 /* Footer */
 .footer {
+  padding: 1rem 0;
   width: 100%;
   position: static;
   bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .footer__title {
-  margin-top: 1.8rem;
+  margin-top: 1rem;
   font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--color-header-font);
+  font-weight: 400;
+  color: #444;
 }
 
 .footer__links {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   width: 10rem;
   display: flex;
   justify-content: space-evenly;
@@ -495,8 +497,13 @@ body::-webkit-scrollbar-thumb {
   border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
 }
 
-/* Scrollbar cart style */
+/* Cart scrollbar style */
 .cart__container::-webkit-scrollbar {
+  width: var(--scroll-cart-size);
+  height: var(--scroll-cart-size);
+}
+/* Search scrollbar style */
+.search__container::-webkit-scrollbar {
   width: var(--scroll-cart-size);
   height: var(--scroll-cart-size);
 }

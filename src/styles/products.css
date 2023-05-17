@@ -27,6 +27,7 @@ a {
   color: #444;
   box-shadow: 2px 2px 8px #ccc;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .product__card:hover {
@@ -56,7 +57,8 @@ a {
   justify-content: center;
   font-size: 1rem;
   text-wrap: balance;
-  font-weight: 600;
+  font-weight: 500;
+  color: #555;
 }
 
 .product__footer {

@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import getConfig from "../utils/getConfig";
-import {scrollToTop} from "../utils/scrollToTop";
+import { scrollToTop } from "../utils/scrollToTop";
+import { ROUTES_PATH, URL_API } from "../consts";
 
-const Orders = ({ setIsLoading }) => {
-	const [orders, setOrders] = useState();
+const Orders = () => {
+	const [orders, setOrders] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setIsLoading(true);
-		const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
+		getAllOrders();
+		scrollToTop();
+	}, []);
+
+	const getAllOrders = () => {
+		const URL = `${URL_API}${ROUTES_PATH.ORDERS}`;
 
 		axios
 			.get(URL, getConfig())
-			.then((res) => setOrders(""))
-			.catch((err) => console.log(err));
-		scrollToTop();
-		setIsLoading(false);
-	}, []);
+			.then((res) => setOrders(res?.data?.orders.reverse()))
+			.catch(() =>
+				console.error("An error occurred while obtaining the orders")
+			);
+	};
 
 	return (
 		<section className="purchases">
@@ -33,29 +38,48 @@ const Orders = ({ setIsLoading }) => {
 				</div>
 				<section className="purchases__container">
 					{orders?.length !== 0 ? (
-						orders?.map((purchase) => (
-							<article className="purchases__product-card" key={purchase.id}>
+						orders?.map((order) => (
+							<main className="purchases__product-card" key={order.id}>
 								<header className="purchases__product-header">
-									<p className="purchases__product-date">
-										{purchase.createdAt.slice(0, 10)}
+									<p className="purchases__product-date">{order.date}</p>
+									<p className="purchases__product-total">
+                    Total:<span> ${order.total}</span>
 									</p>
 								</header>
-								{purchase?.cart.products.map((product) => (
-									<main className="purchases__product-body" key={product.id}>
+								{order?.products?.map((product) => (
+									<article
+										className="purchases__product-container"
+										key={product.id}
+									>
 										<div className="purchases__product-article">
-											<h3 className="purchases__product-title">
-												{product.title}
-											</h3>
-											<span className="purchases__product-quantity">
-												{product.productsInCart.quantity}
-											</span>
-											<span className="purchases__product-price">
-												{`$ ${product.productsInCart.quantity * product.price}`}
-											</span>
+											<button
+												className="purchases__product-img"
+												onClick={() =>
+													navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`)
+												}
+											>
+												<img src={product.image} alt={product.title} />
+											</button>
+											<div className="purchases__product-body">
+												<button
+													className="purchases__product-title"
+													onClick={() =>
+														navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`)
+													}
+												>
+													{product.title}
+												</button>
+												<span className="purchases__product-quantity">
+													{product["order_details"]?.quantity}
+												</span>
+												<span className="purchases__product-price">
+													{`$ ${product["order_details"]?.total}`}
+												</span>
+											</div>
 										</div>
-									</main>
+									</article>
 								))}
-							</article>
+							</main>
 						))
 					) : (
 						<div className="purchases__container-div">
