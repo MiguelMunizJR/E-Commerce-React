@@ -5,7 +5,7 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import useProducts from "../../hooks/useProducts.js";
 import Loading from "../Loading.jsx";
 
-const Home = () => {
+const Home = ({ isLogin }) => {
 	const navigate = useNavigate();
 	// const [productsCategory, setProductsCategory] = useState();
 	// const [category, setCategory] = useState();
@@ -35,9 +35,9 @@ const Home = () => {
 		scrollToTop();
 	}, []);
 
-	const handleSearchItem = (item) => {
-		navigate(`/products/${item.id}`);
-	};
+	// const handleSearchItem = (item) => {
+	// 	navigate(`/products/${item.id}`);
+	// };
 
 	// const toggleSearch = () => {
 	// 	const searchContainer = document.querySelector(".search__container");
@@ -49,21 +49,21 @@ const Home = () => {
 	// 	}
 	// };
 
-	const searchProducts = (e) => {
-		e.preventDefault();
-		const searchValue = e.target.value;
+	// const searchProducts = (e) => {
+	// 	e.preventDefault();
+	// 	const searchValue = e.target.value;
 
-		const filterSearchResult = products?.filter((item) =>
-			item?.title.toLowerCase().includes(searchValue)
-		);
-		// setSearchResult(filterSearchResult);
+	// 	const filterSearchResult = products?.filter((item) =>
+	// 		item?.title.toLowerCase().includes(searchValue)
+	// 	);
+	// 	setSearchResult(filterSearchResult);
 
-		const searchContainer = document.querySelector(".search__container");
+	// 	const searchContainer = document.querySelector(".search__container");
 
-		if (searchContainer.style.display === "none") {
-			searchContainer.style.display = "flex";
-		}
-	};
+	// 	if (searchContainer.style.display === "none") {
+	// 		searchContainer.style.display = "flex";
+	// 	}
+	// };
 
 	// const filterPrice = (e) => {
 	// 	e.preventDefault();
@@ -88,7 +88,7 @@ const Home = () => {
 	return (
 		<section className="home">
 			<article className="home__products">
-				<form className="home__search" onChange={searchProducts}>
+				<form className="home__search" onChange={"searchProducts"}>
 					<div className="search__div">
 						<input
 							type="text"
@@ -120,8 +120,7 @@ const Home = () => {
 							<ProductCard
 								key={product.id}
 								product={product}
-								// cartProducts={cartProducts}
-								// setIsLoading={setIsLoading}
+								isLogin={isLogin}
 							/>
 						))}
 					</article>

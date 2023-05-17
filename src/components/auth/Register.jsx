@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { scrollToTop } from "../../utils/scrollToTop";
-import { ROUTES_PATH, URL_API } from "../../Constants";
+import { ROUTES_PATH, URL_API } from "../../consts";
 
 const Login = ({ isLogin }) => {
 	const { register, handleSubmit, reset } = useForm();

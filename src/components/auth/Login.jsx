@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { scrollToTop } from "../../utils/scrollToTop";
-import { ROUTES_PATH, URL_API } from "../../Constants";
+import { ROUTES_PATH, URL_API } from "../../consts";
 
 const Login = ({ isLogin, setIsLogin }) => {
 	const { register, handleSubmit, reset } = useForm();
@@ -22,7 +22,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 			.post(URL, data)
 			.then((res) => {
 				localStorage.setItem("token", res.data?.token);
-				console.log(res.data);
 				setIsLogin(true);
 				navigate(ROUTES_PATH.HOME);
 			})

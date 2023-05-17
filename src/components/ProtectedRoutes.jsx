@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { ROUTES_PATH } from "../Constants";
+import { ROUTES_PATH } from "../consts";
 
 const ProtectedRoutes = () => {
 	const isLogged = localStorage.getItem("token");

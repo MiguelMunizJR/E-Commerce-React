@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ROUTES_PATH, URL_API } from "../Constants";
+import { ROUTES_PATH, URL_API } from "../consts";
 
 const useProducts = () => {
 	const [products, setProducts] = useState(null);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import getConfig from "../../utils/getConfig";
+import getConfig from "../../utils/getConfig";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import {scrollToTop} from "../../utils/scrollToTop";
-import { ROUTES_PATH, URL_API } from "../../Constants";
+import { scrollToTop } from "../../utils/scrollToTop";
+import { ROUTES_PATH, URL_API } from "../../consts";
 import useProducts from "../../hooks/useProducts";
 
-const ProductDetails = ({ getAllProductsCart, isLogin }) => {
+const ProductDetails = ({ isLogin }) => {
 	const { id } = useParams();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
@@ -22,44 +22,40 @@ const ProductDetails = ({ getAllProductsCart, isLogin }) => {
 			.then((res) => {
 				setProductInfo(res?.data);
 				setCategory(res?.data.category);
-				// setQuantity(1);
 			})
-			.catch(() => setQuantity(1));
+			.catch(() => {
+				console.error("Ha ocurrido un error inesperado");
+			});
 
-		setQuantity(1);
 		scrollToTop();
-
-		if (isLogin) {
-			getAllProductsCart();
-		}
 	}, [id]);
 
-	const productCategory = products?.filter((product) => {
-		if (product.category === category && product.id != id) {
-			return product;
-		}
-	}).slice(0, 4);
+	const productCategory = products
+		?.filter((product) => {
+			if (product.category === category && product.id != id) {
+				return product;
+			}
+		})
+		.slice(0, 4);
 
 	// Agregar al carrito de compras
 	const handleAddCart = () => {
-		const token = localStorage.getItem("token");
-		if (token) {
+		if (isLogin) {
 			const URL = `${URL_API}${ROUTES_PATH.CART}`;
-			const obj = {
-				id: productInfo.id,
+			const cartData = {
+				productId: productInfo.id,
 				quantity: quantity,
 			};
 
 			axios
-				.post(URL, obj, getConfig())
-				.then((res) => {
-					console.log(res.data);
+				.post(URL, cartData, getConfig())
+				.then(() => {
 					alert("product added to cart");
 				})
 				.catch();
 		} else {
 			alert("You need to be logged in to add products to your cart. 😕");
-			navigate("/login");
+			navigate(ROUTES_PATH.LOGIN);
 		}
 		setQuantity(1);
 	};
@@ -137,15 +133,15 @@ const ProductDetails = ({ getAllProductsCart, isLogin }) => {
 						</footer>
 					</div>
 				</article>
+				<footer className="productinfo__footer">
+					<h3 className="productinfo__footer-title">Discover similar items</h3>
+					<section className="productinfo__footer-container">
+						{productCategory?.map((product) => (
+							<ProductCard key={product.id} product={product} />
+						))}
+					</section>
+				</footer>
 			</main>
-			<footer className="productinfo__footer">
-				<h3 className="productinfo__footer-title">Discover similar items</h3>
-				<section className="productinfo__footer-container">
-					{productCategory?.map((product) => (
-						<ProductCard key={product.id} product={product} />
-					))}
-				</section>
-			</footer>
 		</section>
 	);
 };

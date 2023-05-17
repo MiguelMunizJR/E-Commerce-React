@@ -102,6 +102,7 @@ a {
 .productinfo {
   margin: 0 auto;
   width: 85%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: #444;
@@ -135,7 +136,7 @@ a {
 }
 
 .productinfo__container {
-  margin-top: 9rem;
+  margin: 9rem auto 0;
   width: 100%;
   display: flex;
   flex-direction: column;
