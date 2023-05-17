@@ -3,14 +3,16 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { NavLink, useNavigate } from "react-router-dom";
 import ProductCartInfo from "../products/ProductCartInfo";
-import { ROUTES_PATH } from "../../consts";
+import { ROUTES_PATH, URL_API } from "../../consts";
 import { Menu } from "@headlessui/react";
 import useCart from "../../hooks/useCart";
+import closeCartSlider from "../../utils/closeCartSlider";
+import { toast } from "sonner";
 
 const Header = ({ isLogin }) => {
 	const navigate = useNavigate();
 	const { cart, getAllProductsCart } = useCart();
-	
+
 	function toggleCart() {
 		const cartSlider = document.querySelector(".cart");
 		cartSlider.classList.toggle("cart__active");
@@ -18,34 +20,42 @@ const Header = ({ isLogin }) => {
 	}
 
 	// Funcion para hacer check-out del carrito de compras
-	// const handleCheckout = () => {
-	// 	if (isLogin) {
-	// 		const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/purchases";
-	// 		const obj = {
-	// 			street: "Green. 1456",
-	// 			colony: "Southwest",
-	// 			zipCode: 12645,
-	// 			city: "USA",
-	// 			references: "Some refences",
-	// 		};
+	const handleCheckout = () => {
+		if (!isLogin) {
+			toast("You must login to continue", {
+				action: {
+					label: "Login",
+					onClick: () => {
+						closeCartSlider();
+						navigate(ROUTES_PATH.LOGIN);
+					}
+				},
+			});
+		}
 
-	// 		axios
-	// 			.post(URL, obj, getConfig())
-	// 			.then((res) => {
-	// 				console.log(res.data);
-	// 				getAllProductsCart();
-	// 				alert("Thank you for your purchase! 😀");
-	// 				navigate("/");
-	// 			})
-	// 			.catch((err) => {
-	// 				console.log(err);
-	// 				getAllProductsCart();
-	// 			});
-	// 	} else {
-	// 		alert("You must first login before purchasing. 😕");
-	// 		navigate("/login");
-	// 	}
-	// };
+		if (cart.products?.length === 0) {
+			toast.error("Empty cart");
+			return;
+		}
+
+		const URL = `${URL_API}${ROUTES_PATH.ORDERS}`;
+		const orderData = {
+			cartId: cart?.id,
+		};
+
+		axios
+			.post(URL, orderData, getConfig())
+			.then((res) => {
+				console.log(res.data);
+				getAllProductsCart();
+				closeCartSlider();
+				toast.success("Order placed successfully");
+				navigate(ROUTES_PATH.HOME);
+			})
+			.catch(() => {
+				toast.error("An error occurred with the order");
+			});
+	};
 
 	const logout = () => {
 		localStorage.removeItem("token");
@@ -72,20 +82,6 @@ const Header = ({ isLogin }) => {
 							<Menu.Items className="header__profile-menu">
 								<Menu.Item>
 									{({ active }) => (
-										<a
-											className={`${
-												active
-													? "header__profile-item-hover"
-													: "header__profile-item"
-											}`}
-											href="#"
-										>
-                        Account
-										</a>
-									)}
-								</Menu.Item>
-								<Menu.Item>
-									{({ active }) => (
 										<button
 											className={`${
 												active
@@ -94,7 +90,7 @@ const Header = ({ isLogin }) => {
 											}`}
 											onClick={() => logout()}
 										>
-                        Log out
+                      Log out
 										</button>
 									)}
 								</Menu.Item>
@@ -103,13 +99,13 @@ const Header = ({ isLogin }) => {
 					) : (
 						<div className="header__auth-btns">
 							<NavLink to={ROUTES_PATH.LOGIN} className="header__auth-login">
-                  Login
+                Login
 							</NavLink>
 							<NavLink
 								to={ROUTES_PATH.REGISTER}
 								className="header__auth-signup"
 							>
-                  Sign up
+                Sign up
 							</NavLink>
 						</div>
 					)}
@@ -144,8 +140,8 @@ const Header = ({ isLogin }) => {
 				</article>
 				<footer className="cart__footer">
 					<p className="cart__footer-total">Total:</p>
-					<span className="cart__footer-value">{`$${cart?.total}`}</span>
-					<button className="cart__footer-btn" onClick={"handleCheckout"}>
+					<span className="cart__footer-value">{`$${cart?.total || 0}`}</span>
+					<button className="cart__footer-btn" onClick={handleCheckout}>
             Checkout<i className="fa-solid fa-bag-shopping"></i>
 					</button>
 				</footer>

@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH, URL_API } from "../../consts";
+import { toast } from "sonner";
+import closeCartSlider from "../../utils/closeCartSlider";
 
 const Login = ({ isLogin, setIsLogin }) => {
 	const { register, handleSubmit, reset } = useForm();
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		isLogin && navigate(ROUTES_PATH.HOME);
+		closeCartSlider();
 		scrollToTop();
 	}, []);
 
@@ -23,11 +25,10 @@ const Login = ({ isLogin, setIsLogin }) => {
 			.then((res) => {
 				localStorage.setItem("token", res.data?.token);
 				setIsLogin(true);
+				toast.success("You are logged in");
 				navigate(ROUTES_PATH.HOME);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch(() => toast.error("Error trying to log in"));
 
 		reset({
 			email: "",
@@ -38,7 +39,7 @@ const Login = ({ isLogin, setIsLogin }) => {
 	return (
 		<section className="login">
 			<div className="productinfo__return">
-				<p className="productinfo__return-home" onClick={() => navigate("/")}>
+				<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
           Home
 				</p>
 				<div className="productinfo__return-circle"></div>
@@ -52,7 +53,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 				<article className="login__form">
 					<form className="form" onSubmit={handleSubmit(formSubmit)}>
 						<div className="form__email">
-							{/* <i className="fa-solid fa-envelope"></i> */}
 							<div className="form__input-div">
 								<label htmlFor="email">Email<span>*</span></label>
 								<input
@@ -66,7 +66,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 							</div>
 						</div>
 						<div className="form__password">
-							{/* <i className="fa-solid fa-lock"></i> */}
 							<div className="form__input-div">
 								<label htmlFor="password">Password<span>*</span></label>
 								<input
@@ -78,10 +77,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 									required
 								/>
 							</div>
-							{/* <i
-								className="fa-solid fa-eye-slash"
-								onClick={() => setIsVisible(!isVisible)}
-							></i> */}
 						</div>
 						<div className="form__options">
 							<div className="form__remember">
@@ -90,7 +85,7 @@ const Login = ({ isLogin, setIsLogin }) => {
 							</div>
 							<p
 								className="form__forgot-password"
-								onClick={() => alert("in development...")}
+								onClick={() => toast("in development...")}
 							>
                 Forgot password?
 							</p>

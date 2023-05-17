@@ -1,17 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../products/ProductCard.jsx";
 import { scrollToTop } from "../../utils/scrollToTop";
 import useProducts from "../../hooks/useProducts.js";
 import Loading from "../Loading.jsx";
+import { ROUTES_PATH } from "../../consts.js";
+import closeCartSlider from "../../utils/closeCartSlider.js";
 
 const Home = ({ isLogin }) => {
 	const navigate = useNavigate();
-	// const [productsCategory, setProductsCategory] = useState();
+	// const [productsCategory, setProductsCategory] = useState(null);
 	// const [category, setCategory] = useState();
-	// const [searchResult, setSearchResult] = useState();
-
+	const [searchResult, setSearchResult] = useState(null);
 	const { products } = useProducts();
+
+	useEffect(() => {
+		closeCartSlider();
+		scrollToTop();
+	}, []);
 
 	// const productCategories = {
 	// 	Computers: products?.filter((item) => {
@@ -31,39 +37,26 @@ const Home = ({ isLogin }) => {
 	// 	}),
 	// };
 
-	useEffect(() => {
-		scrollToTop();
-	}, []);
+	const handleSearchItem = (product) => {
+		navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`);
+	};
 
-	// const handleSearchItem = (item) => {
-	// 	navigate(`/products/${item.id}`);
-	// };
+	const searchProducts = (event) => {
+		event.preventDefault();
+		const searchContainer = document.querySelector(".search__container")?.style;
+		const { value } = event.target;
 
-	// const toggleSearch = () => {
-	// 	const searchContainer = document.querySelector(".search__container");
+		const filterSearchResult = products?.filter((item) => item?.title.toLowerCase().includes(value.toLowerCase().trim()));
 
-	// 	if (searchContainer.style.display === "flex") {
-	// 		searchContainer.style.display = "none";
-	// 	} else {
-	// 		searchContainer.style.display = "flex";
-	// 	}
-	// };
+		if (value.trim() === "" || filterSearchResult?.length === 0) {
+			searchContainer.display = "none";
+			return;
+		} else {
+			searchContainer.display = "flex";
+		}
 
-	// const searchProducts = (e) => {
-	// 	e.preventDefault();
-	// 	const searchValue = e.target.value;
-
-	// 	const filterSearchResult = products?.filter((item) =>
-	// 		item?.title.toLowerCase().includes(searchValue)
-	// 	);
-	// 	setSearchResult(filterSearchResult);
-
-	// 	const searchContainer = document.querySelector(".search__container");
-
-	// 	if (searchContainer.style.display === "none") {
-	// 		searchContainer.style.display = "flex";
-	// 	}
-	// };
+		setSearchResult(filterSearchResult);
+	};
 
 	// const filterPrice = (e) => {
 	// 	e.preventDefault();
@@ -88,7 +81,7 @@ const Home = ({ isLogin }) => {
 	return (
 		<section className="home">
 			<article className="home__products">
-				<form className="home__search" onChange={"searchProducts"}>
+				<form className="home__search" onChange={searchProducts}>
 					<div className="search__div">
 						<input
 							type="text"
@@ -100,7 +93,7 @@ const Home = ({ isLogin }) => {
 					</div>
 					<section className="search__container">
 						<ul className="search__list">
-							{/* {searchResult?.map((product) => (
+							{searchResult?.map((product) => (
 								<li
 									className="search__item"
 									key={product.id}
@@ -108,7 +101,7 @@ const Home = ({ isLogin }) => {
 								>
 									{product.title}
 								</li>
-							))} */}
+							))}
 						</ul>
 					</section>
 				</form>

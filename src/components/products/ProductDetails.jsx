@@ -3,9 +3,11 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import { toast } from "sonner";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH, URL_API } from "../../consts";
 import useProducts from "../../hooks/useProducts";
+import closeCartSlider from "../../utils/closeCartSlider";
 
 const ProductDetails = ({ isLogin }) => {
 	const { id } = useParams();
@@ -24,9 +26,10 @@ const ProductDetails = ({ isLogin }) => {
 				setCategory(res?.data.category);
 			})
 			.catch(() => {
-				console.error("Ha ocurrido un error inesperado");
+				toast.error("There was an error in obtaining product");
 			});
 
+		closeCartSlider();
 		scrollToTop();
 	}, [id]);
 
@@ -50,11 +53,16 @@ const ProductDetails = ({ isLogin }) => {
 			axios
 				.post(URL, cartData, getConfig())
 				.then(() => {
-					alert("product added to cart");
+					toast.success("Product added to cart");
 				})
-				.catch();
+				.catch(() => toast.error("Error adding product to cart"));
 		} else {
-			alert("You need to be logged in to add products to your cart. 😕");
+			toast("You must login to continue", {
+				action: {
+					label: "Login",
+					onClick: () => navigate(ROUTES_PATH.LOGIN),
+				},
+			});
 			navigate(ROUTES_PATH.LOGIN);
 		}
 		setQuantity(1);
@@ -73,7 +81,7 @@ const ProductDetails = ({ isLogin }) => {
 	return (
 		<section className="productinfo">
 			<div className="productinfo__return">
-				<p className="productinfo__return-home" onClick={() => navigate("/")}>
+				<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
           Home
 				</p>
 				<div className="productinfo__return-circle"></div>

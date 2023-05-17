@@ -1,6 +1,7 @@
 // Dependencies
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
 // Styles
 import "./styles/UI.css";
 import "./styles/products.css";
@@ -29,6 +30,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Toaster richColors position={"top-center"} />
 			<Loading />
 			<Header isLogin={isLogin} />
 			<Routes>
@@ -62,7 +64,7 @@ function App() {
 						<ProductDetails isLogin={isLogin} />
 					}
 				/>
-				<Route element={<ProtectedRoutes />}>
+				<Route element={<ProtectedRoutes isLogin={isLogin} />}>
 					<Route
 						path={ROUTES_PATH.ORDERS}
 						element={<Orders />}

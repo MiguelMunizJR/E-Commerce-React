@@ -2,6 +2,7 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { useNavigate } from "react-router-dom";
 import { ROUTES_PATH, URL_API } from "../../consts";
+import { toast } from "sonner";
 import closeCartSlider from "../../utils/closeCartSlider";
 
 const ProductCartInfo = ({ product, getAllProductsCart }) => {
@@ -9,14 +10,16 @@ const ProductCartInfo = ({ product, getAllProductsCart }) => {
 
 	// Eliminar producto del carrito
 	const handleDeleteProduct = () => {
-		const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}/${product?.id}`;
+		console.log(product.id);
+		const URL = `${URL_API}${ROUTES_PATH.CART}/${product?.id}`;
 		axios
 			.delete(URL, getConfig())
 			.then(() => {
-				alert(`Product ${product.title} removed from cart`);
+				toast.success(`${product.title} removed from cart`);
 				getAllProductsCart();
+				closeCartSlider();
 			})
-			.catch();
+			.catch(() => toast.error("Error removing product from cart"));
 	};
 
 	const handleNavigate = () => {

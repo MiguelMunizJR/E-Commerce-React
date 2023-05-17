@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH, URL_API } from "../../consts";
+import { toast } from "sonner";
+import closeCartSlider from "../../utils/closeCartSlider";
 
 const Login = ({ isLogin }) => {
 	const { register, handleSubmit, reset } = useForm();
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		isLogin && navigate(ROUTES_PATH.HOME);
+		closeCartSlider();
 		scrollToTop();
 	}, []);
 
@@ -22,11 +24,10 @@ const Login = ({ isLogin }) => {
 		axios
 			.post(URL, data)
 			.then(() => {
+				toast.success("You are successfully registered");
 				navigate(ROUTES_PATH.LOGIN);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch(() => toast.error("Error when trying to register"));
 
 		reset({
 			firstName: "",
@@ -38,17 +39,10 @@ const Login = ({ isLogin }) => {
 		});
 	};
 
-	// const logOut = () => {
-	// 	const logOutBtn = document.querySelector(".islogin__btn");
-	// 	logOutBtn.style.display = "none";
-	// 	localStorage.removeItem("token");
-	// 	setIsLogin(false);
-	// };
-
 	return (
 		<section className="login">
 			<div className="productinfo__return">
-				<p className="productinfo__return-home" onClick={() => navigate("/")}>
+				<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
           Home
 				</p>
 				<div className="productinfo__return-circle"></div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import getConfig from "../utils/getConfig";
 import { scrollToTop } from "../utils/scrollToTop";
 import { ROUTES_PATH, URL_API } from "../consts";
@@ -30,7 +30,7 @@ const Orders = () => {
 			<article className="purchases__card">
 				<h2 className="purchases__title">Purchases</h2>
 				<div className="productinfo__return">
-					<p className="productinfo__return-home" onClick={() => navigate("/")}>
+					<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
             Home
 					</p>
 					<div className="productinfo__return-circle"></div>
