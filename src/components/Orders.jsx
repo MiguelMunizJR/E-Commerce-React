@@ -6,12 +6,12 @@ import useOrders from "../hooks/useOrders";
 import { OrdersLoading } from "./Loading";
 import closeCartSlider from "../utils/closeCartSlider";
 
-const Orders = () => {
+const Orders = ({ isLogin }) => {
 	const navigate = useNavigate();
 	const { orders, loading, getAllOrders } = useOrders();
 
 	useEffect(() => {
-		getAllOrders();
+		isLogin && getAllOrders();
 		closeCartSlider();
 		scrollToTop();
 	}, []);
