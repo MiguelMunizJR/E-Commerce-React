@@ -1,5 +1,5 @@
 // Dependencies
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 // Styles
@@ -7,16 +7,18 @@ import "./styles/UI.css";
 import "./styles/products.css";
 // Utils
 import { ROUTES_PATH } from "./consts";
-// Components
-import Header from "./components/UI/Header";
-import Home from "./components/UI/Home";
-import ProductDetails from "./components/products/ProductDetails";
-import Login from "./components/auth/Login";
-import Orders from "./components/Orders";
-import Footer from "./components/UI/Footer";
-import ProtectedRoutes from "./components/ProtectedRoutes";
-import Register from "./components/auth/Register";
-import Loading from "./components/Loading";
+// Components with lazy loading
+const Header = lazy(() => import("./components/UI/Header"));
+const Home = lazy(() => import("./components/UI/Home"));
+const Footer = lazy(() => import("./components/UI/Footer"));
+const ProtectedRoutes = lazy(() => import("./components/ProtectedRoutes"));
+const Login = lazy(() => import("./components/auth/Login"));
+const Register = lazy(() => import("./components/auth/Register"));
+const Loading = lazy(() => import("./components/Loading"));
+const Orders = lazy(() => import("./components/Orders"));
+const ProductDetails = lazy(() =>
+	import("./components/products/ProductDetails")
+);
 
 function App() {
 	const [isLogin, setIsLogin] = useState(false);
@@ -31,47 +33,28 @@ function App() {
 	return (
 		<div className="App">
 			<Toaster richColors position={"top-center"} />
-			<Loading />
-			<Header isLogin={isLogin} />
-			<Routes>
-				<Route
-					path={ROUTES_PATH.HOME}
-					element={
-						<Home isLogin={isLogin} />
-					}
-				/>
-				<Route
-					path={ROUTES_PATH.LOGIN}
-					element={
-						<Login
-							isLogin={isLogin}
-							setIsLogin={setIsLogin}
-						/>
-					}
-				/>
-				<Route
-					path={ROUTES_PATH.REGISTER}
-					element={
-						<Register
-							isLogin={isLogin}
-							setIsLogin={setIsLogin}
-						/>
-					}
-				/>
-				<Route
-					path={ROUTES_PATH.PRODUCT_ID}
-					element={
-						<ProductDetails isLogin={isLogin} />
-					}
-				/>
-				<Route element={<ProtectedRoutes isLogin={isLogin} />}>
+			<Suspense fallback={<Loading />}>
+				<Header isLogin={isLogin} />
+				<Routes>
+					<Route path={ROUTES_PATH.HOME} element={<Home isLogin={isLogin} />} />
 					<Route
-						path={ROUTES_PATH.ORDERS}
-						element={<Orders />}
+						path={ROUTES_PATH.LOGIN}
+						element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}
 					/>
-				</Route>
-			</Routes>
-			<Footer />
+					<Route
+						path={ROUTES_PATH.REGISTER}
+						element={<Register isLogin={isLogin} setIsLogin={setIsLogin} />}
+					/>
+					<Route
+						path={ROUTES_PATH.PRODUCT_ID}
+						element={<ProductDetails isLogin={isLogin} />}
+					/>
+					<Route element={<ProtectedRoutes isLogin={isLogin} />}>
+						<Route path={ROUTES_PATH.ORDERS} element={<Orders />} />
+					</Route>
+				</Routes>
+				<Footer />
+			</Suspense>
 		</div>
 	);
 }
