@@ -7,10 +7,12 @@ const useProducts = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}`;
-
+	//* Obtener todos los productos
 	const getAllProducts = async () => {
-		await axios.get(URL)
+		const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}`;
+
+		await axios
+			.get(URL)
 			.then((res) => {
 				setProducts(res?.data);
 				setLoading(false);
@@ -23,7 +25,6 @@ const useProducts = () => {
 	useEffect(() => {
 		getAllProducts();
 	}, []);
-  
 
 	return { products, loading, error, getAllProducts };
 };

@@ -3,31 +3,30 @@ import axios from "axios";
 import { ROUTES_PATH, URL_API } from "../consts";
 import getConfig from "../utils/getConfig";
 
-const useCart = () => {
-	const [cart, setCart] = useState(null);
+const useOrders = () => {
+	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	//* Obtener productos del carrito
-	const getAllProductsCart = () => {
-		const URL = `${URL_API}${ROUTES_PATH.CART}`;
+	const getAllOrders = () => {
+		const URL = `${URL_API}${ROUTES_PATH.ORDERS}`;
 
 		axios
 			.get(URL, getConfig())
 			.then((res) => {
-				setCart(res?.data.cart);
+				setOrders(res?.data?.orders.reverse());
 				setLoading(false);
 			})
-			.catch((err) => {
-				setError(err.message);
-			});
+			.catch((err) =>
+				setError(err.message)
+			);
 	};
 
 	useEffect(() => {
-		getAllProductsCart();
+		getAllOrders();
 	}, []);
 
-	return { cart, loading, error, getAllProductsCart };
+	return { orders, loading, error, getAllOrders };
 };
 
-export default useCart;
+export default useOrders;

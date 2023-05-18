@@ -1,27 +1,21 @@
 // Dependencies
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { toast } from "sonner";
 // Components & utils
 import CartLoading from "./CartLoading";
 import ProductCartInfo from "../products/ProductCartInfo";
-import getConfig from "../../utils/getConfig";
 import closeCartSlider from "../../utils/closeCartSlider";
-import { ROUTES_PATH, URL_API } from "../../consts";
+import toggleCart from "../../utils/toggleCart";
+import { ROUTES_PATH } from "../../consts";
+import { orderCheckout } from "../../services/cartApiServices";
 import useCart from "../../hooks/useCart";
 
 const Header = ({ isLogin }) => {
 	const navigate = useNavigate();
 	const { cart, loading, getAllProductsCart } = useCart();
 
-	function toggleCart() {
-		const cartSlider = document.querySelector(".cart");
-		cartSlider.classList.toggle("cart__active");
-		isLogin && getAllProductsCart();
-	}
-
-	// Funcion para hacer check-out del carrito de compras
+	//* Funcion para hacer check-out del carrito de compras
 	const handleCheckout = () => {
 		if (!isLogin) {
 			toast("You must login to continue", {
@@ -36,27 +30,13 @@ const Header = ({ isLogin }) => {
 		}
 
 		if (cart.products?.length === 0) {
-			toast.error("Empty cart");
+			toast.error("Cart empty, add products to continue with order");
 			return;
 		}
 
-		const URL = `${URL_API}${ROUTES_PATH.ORDERS}`;
-		const orderData = {
-			cartId: cart?.id,
-		};
-
-		axios
-			.post(URL, orderData, getConfig())
-			.then((res) => {
-				console.log(res.data);
-				getAllProductsCart();
-				closeCartSlider();
-				toast.success("Order placed successfully");
-				navigate(ROUTES_PATH.HOME);
-			})
-			.catch(() => {
-				toast.error("An error occurred with the order");
-			});
+		orderCheckout(cart, getAllProductsCart);
+		closeCartSlider();
+		navigate(ROUTES_PATH.HOME);
 	};
 
 	const logout = () => {
@@ -123,7 +103,7 @@ const Header = ({ isLogin }) => {
 						</NavLink>
 					)}
 				</div>
-				<button onClick={toggleCart} className="header__cart-btn">
+				<button onClick={() => toggleCart(isLogin, getAllProductsCart)} className="header__cart-btn">
 					<i className="fa-solid fa-cart-shopping header__link"></i>
 					<p>Cart</p>
 				</button>

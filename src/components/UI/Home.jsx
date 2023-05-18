@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../products/ProductCard.jsx";
 import { scrollToTop } from "../../utils/scrollToTop";
-import useProducts from "../../hooks/useProducts.js";
 import { ROUTES_PATH } from "../../consts.js";
 import closeCartSlider from "../../utils/closeCartSlider.js";
 import { ProductsLoading } from "../products/ProductsLoading.jsx";
+import useProducts from "../../hooks/useProducts.js";
 
 const Home = ({ isLogin }) => {
 	const navigate = useNavigate();
