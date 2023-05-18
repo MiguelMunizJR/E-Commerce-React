@@ -56,7 +56,7 @@ const Home = ({ isLogin }) => {
 		} else {
 			searchContainer.display = "flex";
 		}
-
+		
 		setSearchResult(filterSearchResult);
 	};
 

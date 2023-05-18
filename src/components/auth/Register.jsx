@@ -18,7 +18,6 @@ const Login = ({ isLogin }) => {
 	}, []);
 
 	const formSubmit = (data) => {
-		console.log(data);
 		const URL = `${URL_API}${ROUTES_PATH.REGISTER}`;
 
 		axios
@@ -26,17 +25,16 @@ const Login = ({ isLogin }) => {
 			.then(() => {
 				toast.success("You are successfully registered");
 				navigate(ROUTES_PATH.LOGIN);
+				reset({
+					firstName: "",
+					lastName: "",
+					email: "",
+					password: "",
+					birthday: "",
+					phone: "",
+				});
 			})
 			.catch(() => toast.error("Error when trying to register"));
-
-		reset({
-			firstName: "",
-			lastName: "",
-			email: "",
-			password: "",
-			birthday: "",
-			phone: "",
-		});
 	};
 
 	return (
