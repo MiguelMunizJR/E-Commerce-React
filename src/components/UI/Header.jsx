@@ -56,7 +56,7 @@ const Header = ({ isLogin }) => {
 						<Menu>
 							<Menu.Button as="div" className="header__profile">
 								<img
-									src="../../../public/user_profile.png"
+									src="https://i.postimg.cc/B6Lr41Hc/user-profile.png"
 									alt="user_profile"
 								/>
 							</Menu.Button>
