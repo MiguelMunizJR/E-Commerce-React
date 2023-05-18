@@ -1,78 +1,74 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import getConfig from "../utils/getConfig";
 import { scrollToTop } from "../utils/scrollToTop";
-import { ROUTES_PATH, URL_API } from "../consts";
+import { ROUTES_PATH } from "../consts";
+import useOrders from "../hooks/useOrders";
+import { OrdersLoading } from "./Loading";
+import closeCartSlider from "../utils/closeCartSlider";
 
 const Orders = () => {
-	const [orders, setOrders] = useState([]);
 	const navigate = useNavigate();
+	const { orders, loading, getAllOrders } = useOrders();
 
 	useEffect(() => {
 		getAllOrders();
+		closeCartSlider();
 		scrollToTop();
 	}, []);
 
-	const getAllOrders = () => {
-		const URL = `${URL_API}${ROUTES_PATH.ORDERS}`;
-
-		axios
-			.get(URL, getConfig())
-			.then((res) => setOrders(res?.data?.orders.reverse()))
-			.catch(() =>
-				console.error("An error occurred while obtaining the orders")
-			);
-	};
-
 	return (
-		<section className="purchases">
-			<article className="purchases__card">
-				<h2 className="purchases__title">Purchases</h2>
+		<section className="orders">
+			<article className="orders__card">
+				<h2 className="orders__title">Orders</h2>
 				<div className="productinfo__return">
-					<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
+					<p
+						className="productinfo__return-home"
+						onClick={() => navigate(ROUTES_PATH.HOME)}
+					>
             Home
 					</p>
 					<div className="productinfo__return-circle"></div>
-					<p className="productinfo__return-product">Purchases</p>
+					<p className="productinfo__return-product">Orders</p>
 				</div>
-				<section className="purchases__container">
-					{orders?.length !== 0 ? (
+				<section className="orders__container">
+					{loading ? (
+						<OrdersLoading />
+					) : orders?.length !== 0 ? (
 						orders?.map((order) => (
-							<main className="purchases__product-card" key={order.id}>
-								<header className="purchases__product-header">
-									<p className="purchases__product-date">{order.date}</p>
-									<p className="purchases__product-total">
+							<main className="orders__product-card" key={order.id}>
+								<header className="orders__product-header">
+									<p className="orders__product-date">{order.date}</p>
+									<p className="orders__product-total">
                     Total:<span> ${order.total}</span>
 									</p>
 								</header>
 								{order?.products?.map((product) => (
 									<article
-										className="purchases__product-container"
+										className="orders__product-container"
 										key={product.id}
 									>
-										<div className="purchases__product-article">
+										<div className="orders__product-article">
 											<button
-												className="purchases__product-img"
+												className="orders__product-img"
 												onClick={() =>
 													navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`)
 												}
 											>
 												<img src={product.image} alt={product.title} />
 											</button>
-											<div className="purchases__product-body">
+											<div className="orders__product-body">
 												<button
-													className="purchases__product-title"
+													className="orders__product-title"
 													onClick={() =>
 														navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`)
 													}
 												>
 													{product.title}
 												</button>
-												<span className="purchases__product-quantity">
+												<span className="orders__product-quantity">
 													{product["order_details"]?.quantity}
 												</span>
-												<span className="purchases__product-price">
+												<span className="orders__product-price">
 													{`$ ${product["order_details"]?.total}`}
 												</span>
 											</div>
@@ -82,9 +78,9 @@ const Orders = () => {
 							</main>
 						))
 					) : (
-						<div className="purchases__container-div">
-							<i className="fa-regular fa-face-frown purchases__face"></i>
-							<h4 className="purchases__container-message">
+						<div className="orders__container-div">
+							<i className="fa-regular fa-face-frown orders__face"></i>
+							<h4 className="orders__container-message">
                 You do not have orders
 							</h4>
 						</div>
