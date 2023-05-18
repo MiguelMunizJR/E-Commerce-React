@@ -3,7 +3,7 @@ import axios from "axios";
 import { ROUTES_PATH, URL_API } from "../consts";
 
 const useProducts = () => {
-	const [products, setProducts] = useState(null);
+	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 

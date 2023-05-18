@@ -4,7 +4,7 @@ import { ROUTES_PATH, URL_API } from "../consts";
 import getConfig from "../utils/getConfig";
 
 const useCart = () => {
-	const [cart, setCart] = useState(null);
+	const [cart, setCart] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
