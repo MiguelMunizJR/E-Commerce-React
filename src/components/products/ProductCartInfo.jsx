@@ -1,31 +1,9 @@
-import axios from "axios";
-import getConfig from "../../utils/getConfig";
 import { useNavigate } from "react-router-dom";
-import { ROUTES_PATH, URL_API } from "../../consts";
-import { toast } from "sonner";
-import closeCartSlider from "../../utils/closeCartSlider";
+import { ROUTES_PATH } from "../../consts";
+import { removeProductCart } from "../../services/cartApiServices";
 
 const ProductCartInfo = ({ product, getAllProductsCart }) => {
 	const navigate = useNavigate();
-
-	// Eliminar producto del carrito
-	const handleDeleteProduct = () => {
-		console.log(product.id);
-		const URL = `${URL_API}${ROUTES_PATH.CART}/${product?.id}`;
-		axios
-			.delete(URL, getConfig())
-			.then(() => {
-				toast.success(`${product.title} removed from cart`);
-				getAllProductsCart();
-				closeCartSlider();
-			})
-			.catch(() => toast.error("Error removing product from cart"));
-	};
-
-	const handleNavigate = () => {
-		navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`);
-		closeCartSlider();
-	};
 
 	return (
 		<article className="cart__product-card">
@@ -33,12 +11,12 @@ const ProductCartInfo = ({ product, getAllProductsCart }) => {
 				<div className="cart__product-icon">
 					<i
 						className="fa-solid fa-trash-can"
-						onClick={handleDeleteProduct}
+						onClick={() => removeProductCart(product, getAllProductsCart)}
 					></i>
 				</div>
 				<div className="cart__product-container">
 					<div className="cart__product-img">
-						<img src={product.image} alt={product.title} onClick={handleNavigate} />
+						<img src={product.image} alt={product.title} onClick={() => navigate(`${ROUTES_PATH.PRODUCTS}/${product.id}`)} />
 					</div>
 					<div className="cart__product-title-div">
 						<h4 className="cart__product-title">{product.title}</h4>

@@ -1,17 +1,19 @@
-/* eslint-disable react/prop-types */
+// Dependencies
 import axios from "axios";
-import getConfig from "../../utils/getConfig";
 import { NavLink, useNavigate } from "react-router-dom";
-import ProductCartInfo from "../products/ProductCartInfo";
-import { ROUTES_PATH, URL_API } from "../../consts";
 import { Menu } from "@headlessui/react";
-import useCart from "../../hooks/useCart";
-import closeCartSlider from "../../utils/closeCartSlider";
 import { toast } from "sonner";
+// Components & utils
+import CartLoading from "./CartLoading";
+import ProductCartInfo from "../products/ProductCartInfo";
+import getConfig from "../../utils/getConfig";
+import closeCartSlider from "../../utils/closeCartSlider";
+import { ROUTES_PATH, URL_API } from "../../consts";
+import useCart from "../../hooks/useCart";
 
 const Header = ({ isLogin }) => {
 	const navigate = useNavigate();
-	const { cart, getAllProductsCart } = useCart();
+	const { cart, loading, getAllProductsCart } = useCart();
 
 	function toggleCart() {
 		const cartSlider = document.querySelector(".cart");
@@ -130,13 +132,17 @@ const Header = ({ isLogin }) => {
 			<section className="cart">
 				<h2 className="cart__title">Shopping cart</h2>
 				<article className="cart__container">
-					{cart?.products?.map((product) => (
-						<ProductCartInfo
-							key={product.id}
-							product={product}
-							getAllProductsCart={getAllProductsCart}
-						/>
-					))}
+					{loading ? (
+						<CartLoading />
+					) : (
+						cart?.products?.map((product) => (
+							<ProductCartInfo
+								key={product.id}
+								product={product}
+								getAllProductsCart={getAllProductsCart}
+							/>
+						))
+					)}
 				</article>
 				<footer className="cart__footer">
 					<p className="cart__footer-total">Total:</p>

@@ -3,16 +3,16 @@ import { useNavigate } from "react-router-dom";
 import ProductCard from "../products/ProductCard.jsx";
 import { scrollToTop } from "../../utils/scrollToTop";
 import useProducts from "../../hooks/useProducts.js";
-import Loading from "../Loading.jsx";
 import { ROUTES_PATH } from "../../consts.js";
 import closeCartSlider from "../../utils/closeCartSlider.js";
+import { ProductsLoading } from "../products/ProductsLoading.jsx";
 
 const Home = ({ isLogin }) => {
 	const navigate = useNavigate();
 	// const [productsCategory, setProductsCategory] = useState(null);
 	// const [category, setCategory] = useState();
 	const [searchResult, setSearchResult] = useState(null);
-	const { products } = useProducts();
+	const { products, loading } = useProducts();
 
 	useEffect(() => {
 		closeCartSlider();
@@ -46,7 +46,9 @@ const Home = ({ isLogin }) => {
 		const searchContainer = document.querySelector(".search__container")?.style;
 		const { value } = event.target;
 
-		const filterSearchResult = products?.filter((item) => item?.title.toLowerCase().includes(value.toLowerCase().trim()));
+		const filterSearchResult = products?.filter((item) =>
+			item?.title.toLowerCase().includes(value.toLowerCase().trim())
+		);
 
 		if (value.trim() === "" || filterSearchResult?.length === 0) {
 			searchContainer.display = "none";
@@ -108,14 +110,17 @@ const Home = ({ isLogin }) => {
 				<article className="home__container">
 					<h2 className="home__title">Products</h2>
 					<article className="products__container">
-						{<Loading />}
-						{products?.map((product) => (
-							<ProductCard
-								key={product.id}
-								product={product}
-								isLogin={isLogin}
-							/>
-						))}
+						{loading ? (
+							<ProductsLoading />
+						) : (
+							products?.map((product) => (
+								<ProductCard
+									key={product.id}
+									product={product}
+									isLogin={isLogin}
+								/>
+							))
+						)}
 					</article>
 				</article>
 			</article>
