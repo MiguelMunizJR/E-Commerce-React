@@ -4,7 +4,7 @@ import ProductCard from "../products/ProductCard.jsx";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH } from "../../consts.js";
 import closeCartSlider from "../../utils/closeCartSlider.js";
-import { ProductsLoading } from "../products/ProductsLoading.jsx";
+import { ProductsLoading } from "../Loading";
 import useProducts from "../../hooks/useProducts.js";
 
 const Home = ({ isLogin }) => {

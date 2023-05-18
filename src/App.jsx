@@ -14,10 +14,9 @@ const Footer = lazy(() => import("./components/UI/Footer"));
 const ProtectedRoutes = lazy(() => import("./components/ProtectedRoutes"));
 const Login = lazy(() => import("./components/auth/Login"));
 const Register = lazy(() => import("./components/auth/Register"));
-const Loading = lazy(() => import("./components/Loading"));
+const Loading= lazy(() => import("./components/Loading"));
 const Orders = lazy(() => import("./components/Orders"));
-const ProductDetails = lazy(() =>
-	import("./components/products/ProductDetails")
+const ProductDetails = lazy(() => import("./components/products/ProductDetails")
 );
 
 function App() {

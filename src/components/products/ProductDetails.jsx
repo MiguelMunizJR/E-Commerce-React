@@ -7,7 +7,7 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH, URL_API } from "../../consts";
 import useProducts from "../../hooks/useProducts";
 import closeCartSlider from "../../utils/closeCartSlider";
-import { ProductsLoading } from "./ProductsLoading";
+import { ProductsLoading } from "../Loading";
 import { addProductToCart } from "../../services/cartApiServices";
 
 const ProductDetails = ({ isLogin }) => {

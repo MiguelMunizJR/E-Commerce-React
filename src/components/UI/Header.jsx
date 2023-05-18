@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { toast } from "sonner";
 // Components & utils
-import CartLoading from "./CartLoading";
+import { CartLoading } from "../Loading";
 import ProductCartInfo from "../products/ProductCartInfo";
 import closeCartSlider from "../../utils/closeCartSlider";
 import toggleCart from "../../utils/toggleCart";
