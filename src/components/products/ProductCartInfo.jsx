@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES_PATH } from "../../consts";
-import { removeProductCart } from "../../services/cartApiServices";
+import { removeProductCart } from "../../services/apiServices";
 
 const ProductCartInfo = ({ product, getAllProductsCart }) => {
 	const navigate = useNavigate();

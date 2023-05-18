@@ -8,7 +8,7 @@ import ProductCartInfo from "../products/ProductCartInfo";
 import closeCartSlider from "../../utils/closeCartSlider";
 import toggleCart from "../../utils/toggleCart";
 import { ROUTES_PATH } from "../../consts";
-import { orderCheckout } from "../../services/cartApiServices";
+import { orderCheckout } from "../../services/apiServices";
 import useCart from "../../hooks/useCart";
 
 const Header = ({ isLogin }) => {
@@ -17,26 +17,25 @@ const Header = ({ isLogin }) => {
 
 	//* Funcion para hacer check-out del carrito de compras
 	const handleCheckout = () => {
-		if (!isLogin) {
+		if (isLogin) {
+			if (cart.products?.length === 0) {
+				toast.error("Cart empty, add products to continue with order");
+			} else {
+				orderCheckout(cart, getAllProductsCart);
+				closeCartSlider();
+				navigate(ROUTES_PATH.HOME);
+			}
+		} else {
 			toast("You must login to continue", {
 				action: {
 					label: "Login",
 					onClick: () => {
 						closeCartSlider();
 						navigate(ROUTES_PATH.LOGIN);
-					}
+					},
 				},
 			});
 		}
-
-		if (cart.products?.length === 0) {
-			toast.error("Cart empty, add products to continue with order");
-			return;
-		}
-
-		orderCheckout(cart, getAllProductsCart);
-		closeCartSlider();
-		navigate(ROUTES_PATH.HOME);
 	};
 
 	const logout = () => {
@@ -103,7 +102,10 @@ const Header = ({ isLogin }) => {
 						</NavLink>
 					)}
 				</div>
-				<button onClick={() => toggleCart(isLogin, getAllProductsCart)} className="header__cart-btn">
+				<button
+					onClick={() => toggleCart(isLogin, getAllProductsCart)}
+					className="header__cart-btn"
+				>
 					<i className="fa-solid fa-cart-shopping header__link"></i>
 					<p>Cart</p>
 				</button>
@@ -112,7 +114,7 @@ const Header = ({ isLogin }) => {
 			<section className="cart">
 				<h2 className="cart__title">Shopping cart</h2>
 				<article className="cart__container">
-					{loading ? (
+					{loading && isLogin ? (
 						<CartLoading />
 					) : (
 						cart?.products?.map((product) => (

@@ -1,10 +1,9 @@
-import axios from "axios";
-import getConfig from "../../utils/getConfig";
 import { useNavigate } from "react-router-dom";
-import { scrollToTop } from "../../utils/scrollToTop";
-import { ROUTES_PATH, URL_API } from "../../consts";
-import closeCartSlider from "../../utils/closeCartSlider";
 import { toast } from "sonner";
+
+import { scrollToTop } from "../../utils/scrollToTop";
+import { ROUTES_PATH } from "../../consts";
+import { addProductToCart } from "../../services/apiServices";
 
 const ProductCard = ({ product, isLogin }) => {
 	const navigate = useNavigate();
@@ -14,23 +13,11 @@ const ProductCard = ({ product, isLogin }) => {
 		scrollToTop();
 	};
 
-	// Agregar al carrito de compras
 	const handleAddCart = (event) => {
 		event.stopPropagation();
 
 		if (isLogin) {
-			const URL = `${URL_API}${ROUTES_PATH.CART}`;
-			const cartData = {
-				productId: product.id,
-			};
-
-			axios
-				.post(URL, cartData, getConfig())
-				.then(() => {
-					closeCartSlider();
-					toast.success("Product added to cart");
-				})
-				.catch(() => toast.error("Error adding product to cart"));
+			addProductToCart(product);
 		} else {
 			toast("You must login to continue", {
 				action: {

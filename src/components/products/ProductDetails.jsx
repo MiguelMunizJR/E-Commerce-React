@@ -8,7 +8,7 @@ import { ROUTES_PATH, URL_API } from "../../consts";
 import useProducts from "../../hooks/useProducts";
 import closeCartSlider from "../../utils/closeCartSlider";
 import { ProductsLoading } from "../Loading";
-import { addProductToCart } from "../../services/cartApiServices";
+import { addProductToCart } from "../../services/apiServices";
 
 const ProductDetails = ({ isLogin }) => {
 	const { id } = useParams();
@@ -19,8 +19,8 @@ const ProductDetails = ({ isLogin }) => {
 	const { products, loading } = useProducts();
 
 	useEffect(() => {
-		//* Refactoring with hook pending...
 		const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}/${id}`;
+		
 		axios
 			.get(URL)
 			.then((res) => {
@@ -57,6 +57,7 @@ const ProductDetails = ({ isLogin }) => {
 			});
 			navigate(ROUTES_PATH.LOGIN);
 		}
+		
 		setQuantity(1);
 	};
 
