@@ -349,7 +349,7 @@ a {
   align-items: center;
   justify-content: center;
   background-color: #ffffff90;
-  z-index: 1000;
+  z-index: 1100;
 }
 
 .loading__spinner {

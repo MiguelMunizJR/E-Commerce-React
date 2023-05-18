@@ -55,7 +55,7 @@ a {
   justify-content: space-between;
   background-color: #fff;
   box-shadow: var(--shadow-elevation-medium);
-  z-index: 500;
+  z-index: 1000;
 }
 
 .header__logo {
@@ -99,6 +99,7 @@ a {
   border-radius: 5px;
   border: none;
   cursor: default;
+  z-index: 1000;
 }
 
 .header__profile-item {
