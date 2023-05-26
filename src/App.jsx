@@ -31,7 +31,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Toaster richColors position={"top-center"} />
+			<Toaster richColors />
 			<Suspense fallback={<Loading />}>
 				<Header isLogin={isLogin} />
 				<Routes>

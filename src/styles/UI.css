@@ -49,7 +49,7 @@ a {
   position: fixed;
   top: 0;
   height: 3.5rem;
-  padding: 0.5rem 6rem;
+  padding: 2rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,7 +59,7 @@ a {
 }
 
 .header__logo {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--color-header-title);
 }
@@ -79,8 +79,9 @@ a {
 }
 
 .header__profile {
-  margin-right: 1.5rem;
-  width: 38px;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
   display: flex;
   align-items: center;
 }
@@ -88,9 +89,9 @@ a {
 .header__profile-menu {
   padding-top: 1rem;
   width: 8rem;
-  height: 3rem;
+  height: 8rem;
   position: absolute;
-  top: 53px;
+  top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,7 +152,7 @@ a {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 1.1rem;
+  font-size: 20px;
   background-color: transparent;
   color: var(--color-header-links);
   border: none;
@@ -165,7 +166,7 @@ a {
 
 .header__cart-btn p {
   font-family: "Montserrat";
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -173,14 +174,14 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.1rem;
-  gap: 5px;
+  font-size: 17px;
+  gap: 3px;
   color: #555;
   cursor: pointer;
 }
 
 .header__item p {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -190,7 +191,6 @@ a {
 }
 
 .header__auth-btns {
-  margin-right: 1.5rem;
   display: flex;
   align-items: center;
   font-size: .9rem;
@@ -198,11 +198,11 @@ a {
 }
 
 .header__auth-login {
-  padding: 6px 20px;
+  padding: 6px 14px;
   font-weight: 500;
   color: #1b85e9c9;
   border: 2px solid #1b85e9c9;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 1px 1px 3px #2547684d;
 }
 
@@ -213,12 +213,12 @@ a {
 }
 
 .header__auth-signup {
-  padding: 6px 12px;
+  padding: 6px 8px;
   color: white;
   font-weight: 500;
   background-color: #1b85e9;
   border: 2px solid #1b85e9;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 1px 1px 3px #25476893;
 }
 
@@ -241,11 +241,11 @@ a {
 
 /* Cart */
 .cart {
-  width: 20rem;
+  width: 16rem;
   height: 100vh;
   position: fixed;
-  top: 56px;
-  right: -20.5rem;
+  top: 64px;
+  right: -16.1rem;
   flex-direction: column;
   color: #333;
   background-color: #f9f9f9;
@@ -255,10 +255,10 @@ a {
 }
 
 .cart__active {
-  width: 20rem;
+  width: 16rem;
   height: 100vh;
   position: fixed;
-  top: 56px;
+  top: 64px;
   right: 0rem;
   flex-direction: column;
   color: #333;
@@ -375,7 +375,7 @@ a {
 
 /* Home */
 .home {
-  margin-top: 3.5rem;
+  margin-top: 6rem;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -383,18 +383,18 @@ a {
 
 /* Home products */
 .home__products {
-  width: 85%;
-  margin: 1rem auto 0;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 
 .home__search {
-  margin: 15px 0 10px;
+  margin: 5px 0 15px;
 }
 
 .search__input {
-  width: 40%;
+  width: 70%;
   height: 2.5rem;
   padding: 0 40px 0 20px;
   font-size: 1rem;
@@ -474,13 +474,13 @@ a {
 }
 
 .products__container {
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: 5rem;
   width: 100%;
   min-height: 22rem;
   display: grid;
   position: relative;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   place-items: center;
   column-gap: 2rem;
   row-gap: 3rem;
@@ -526,6 +526,60 @@ a {
   color: #333;
   transition: 0.5s;
 }
+
+/* Mediaqueries */
+@media screen and (min-width: 768px) {
+
+  .header {
+    padding: 2rem 4rem;
+  }
+
+  .header__logo {
+    font-size: 1.8rem;
+  }
+
+  .header__profile {
+    margin-right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .home__products {
+    width: 83%;
+  }
+
+  .search__input {
+    width: 70%;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  .header {
+    padding-left: 6rem;
+    padding-right: 10rem;
+  }
+
+  .header__logo {
+    font-size: 1.8rem;
+  }
+
+  .cart__active {
+    width: 20rem;
+  }
+
+  .home__products {
+    width: 86%;
+  }
+
+  .search__input {
+    width: 50%;
+  }
+}
+
+
+
 
 /* Scrollbar style */
 body::-webkit-scrollbar {

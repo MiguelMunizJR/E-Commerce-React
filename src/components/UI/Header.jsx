@@ -47,7 +47,7 @@ const Header = ({ isLogin }) => {
 		<header className="header">
 			<div>
 				<NavLink to={ROUTES_PATH.HOME}>
-					<h1 className="header__logo">e-commerce</h1>
+					<h1 className="header__logo">ecommerce</h1>
 				</NavLink>
 			</div>
 			<nav className="header__nav">
@@ -90,7 +90,7 @@ const Header = ({ isLogin }) => {
 							</NavLink>
 						</div>
 					)}
-					{isLogin && (
+					{/* {isLogin && (
 						<NavLink
 							to={ROUTES_PATH.ORDERS}
 							className={({ isActive }) =>
@@ -100,15 +100,19 @@ const Header = ({ isLogin }) => {
 							<i className="fa-solid fa-store"></i>
 							<p>Orders</p>
 						</NavLink>
-					)}
+					)} */}
 				</div>
-				<button
-					onClick={() => toggleCart(isLogin, getAllProductsCart)}
-					className="header__cart-btn"
-				>
-					<i className="fa-solid fa-cart-shopping header__link"></i>
-					<p>Cart</p>
-				</button>
+				{
+					isLogin && (
+						<button
+							onClick={() => toggleCart(isLogin, getAllProductsCart)}
+							className="header__cart-btn"
+						>
+							<i className="fa-solid fa-cart-shopping header__link"></i>
+							<p>Cart</p>
+						</button>
+					)
+				}
 			</nav>
 			{/* Cart section */}
 			<section className="cart">
