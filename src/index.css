@@ -359,7 +359,7 @@ a {
   border: 3px solid #999;
   border-top-color: transparent;
   animation: loading 1s linear infinite;
-  transition: .2s ease-in-out;
+  transition: .8s ease-in-out;
 }
 
 @keyframes loading {
