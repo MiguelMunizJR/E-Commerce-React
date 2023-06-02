@@ -18,9 +18,8 @@ a {
 
 .App {
   width: 100%;
-  min-height: 100vh;
   font-family: "Montserrat", sans-serif;
-  background-color: #fff;
+  background-color: #f9fcff;
 }
 
 /* Login */
@@ -33,32 +32,30 @@ a {
 }
 
 .login__title {
-  margin: 7rem 0 3rem;
+  margin: 10rem 0 2rem;
   color: #333;
   display: flex;
-  align-items: center;
   gap: 7px;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 600;
 }
 
 .register__title {
-  margin: 5rem 0 4rem;
+  margin: 10rem 0 2rem;
   color: #333;
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 600;
 }
 
-.login__card {
+.auth__card {
   margin-bottom: 4rem;
   width: max-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .form {
@@ -138,7 +135,7 @@ a {
 }
 
 .form__submit {
-  margin-top: 1.5rem;
+  margin: 3rem 0;
   height: 2.8rem;
   font-size: 1rem;
   font-weight: 500;
@@ -360,6 +357,28 @@ a {
   border-top-color: transparent;
   animation: loading 1s linear infinite;
   transition: .8s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+
+  .login__title {
+    margin-bottom: 4rem;
+    font-size: 1.8rem;
+  }
+
+  .auth__card {
+    align-items: center;
+  }
+
+
+  .register__title {
+    margin-bottom: 4rem;
+    font-size: 1.8rem;
+  }
+
+  .register__card {
+    align-items: center;
+  }
 }
 
 @keyframes loading {

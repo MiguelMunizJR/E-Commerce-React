@@ -113,8 +113,8 @@ a {
 .productinfo__return {
   position: absolute;
   top: 5rem;
-  left: 6rem;
-  display: flex;
+  left: 4rem;
+  display: none;
   align-items: center;
   color: #555;
   gap: 7px;
@@ -467,12 +467,20 @@ a {
   .product__footer {
     padding: 2rem 2rem;
   }
+
+  .productinfo__return {
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   .product__btn {
     width: 3.5rem;
     height: 3.5rem;
+  }
+
+  .productinfo__return {
+    left: 6rem;
   }
 }
 

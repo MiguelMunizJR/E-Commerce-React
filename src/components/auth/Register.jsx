@@ -46,9 +46,8 @@ const Login = ({ isLogin }) => {
 				<div className="productinfo__return-circle"></div>
 				<p className="productinfo__return-product">Sign up</p>
 			</div>
-
-			<h2 className="register__title"><i className="fa-solid fa-user"></i>Sign up</h2>
-			<article className="login__card">
+			<article className="auth__card">
+				<h2 className="register__title"><i className="fa-solid fa-user"></i>Sign up</h2>
 				<form className="form" onSubmit={handleSubmit(formSubmit)}>
 					{/* First Name */}
 					<div className="form__input-div form__firstname">

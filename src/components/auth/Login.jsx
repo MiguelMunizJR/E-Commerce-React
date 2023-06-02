@@ -46,10 +46,10 @@ const Login = ({ isLogin, setIsLogin }) => {
 				<p className="productinfo__return-product">Login</p>
 			</div>
 
-			<h2 className="login__title">
-				<i className="fa-solid fa-user"></i>Login
-			</h2>
-			<article className="login__card">
+			<article className="auth__card">
+				<h2 className="login__title">
+					<i className="fa-solid fa-user"></i>Login
+				</h2>
 				<article className="login__form">
 					<form className="form" onSubmit={handleSubmit(formSubmit)}>
 						<div className="form__email">
