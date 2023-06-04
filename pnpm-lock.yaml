@@ -7,6 +7,9 @@ dependencies:
   axios:
     specifier: ^0.27.2
     version: 0.27.2
+  canvas-confetti:
+    specifier: 1.6.0
+    version: 1.6.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -682,6 +685,10 @@ packages:
   /caniuse-lite@1.0.30001487:
     resolution: {integrity: sha512-83564Z3yWGqXsh2vaH/mhXfEM0wX+NlBCm1jYHOb97TrTWJEmPTccZgeLTPBUUb0PNVo+oomb7wkimZBIERClA==}
     dev: true
+
+  /canvas-confetti@1.6.0:
+    resolution: {integrity: sha512-ej+w/m8Jzpv9Z7W7uJZer14Ke8P2ogsjg4ZMGIuq4iqUOqY2Jq8BNW42iGmNfRwREaaEfFIczLuZZiEVSYNHAA==}
+    dev: false
 
   /chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}

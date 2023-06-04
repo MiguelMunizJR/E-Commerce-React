@@ -2,6 +2,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
 // Components & utils
 import { CartLoading } from "../Loading";
 import ProductCartInfo from "../products/ProductCartInfo";
@@ -23,6 +24,14 @@ const Header = ({ isLogin }) => {
 				toast.error("Cart empty, add products to continue with order");
 			} else {
 				orderCheckout(cart, getAllProductsCart);
+				confetti({
+					particleCount: 200,
+					spread: 150,
+					origin: {
+						x: .5,
+						y: .8
+					}
+				});
 				closeCartSlider();
 				navigate(ROUTES_PATH.HOME);
 			}
@@ -136,8 +145,10 @@ const Header = ({ isLogin }) => {
 				</article>
 				<footer className="cart__footer">
 					<p className="cart__footer-total">Total:</p>
-					<span className="cart__footer-value">{`$${cart?.total || 0}`}</span>
-					<button className="cart__footer-btn" onClick={handleCheckout}>
+					<span className="cart__footer-value">{`$${cart?.total?.toLocaleString("es-MX", {
+						currency: "MXN",
+					}) || 0}`}</span>
+					<button className="cart__footer-btn" onClick={handleCheckout} disabled={cart.products?.length < 1}>
             Checkout<i className="fa-solid fa-bag-shopping"></i>
 					</button>
 				</footer>
