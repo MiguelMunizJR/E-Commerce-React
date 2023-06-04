@@ -10,6 +10,7 @@ const useCart = () => {
 
 	//* Obtener productos del carrito
 	const getAllProductsCart = () => {
+		setLoading(true);
 		const URL = `${URL_API}${ROUTES_PATH.CART}`;
 
 		axios

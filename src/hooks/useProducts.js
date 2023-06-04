@@ -9,6 +9,7 @@ const useProducts = () => {
 
 	//* Obtener todos los productos
 	const getAllProducts = async () => {
+		setLoading(true);
 		const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}`;
 
 		await axios
