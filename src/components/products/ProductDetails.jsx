@@ -109,7 +109,9 @@ const ProductDetails = ({ isLogin }) => {
 										<label
 											htmlFor="price"
 											className="productinfo__price-value"
-										>{`$ ${productInfo?.price}`}</label>
+										>{`$${productInfo?.price.toLocaleString("es-MX", {
+												currency: "MXN",
+											})}`}</label>
 									</div>
 									<div className="productinfo__quantity">
 										<p className="productinfo__quantity-title">Quantity</p>

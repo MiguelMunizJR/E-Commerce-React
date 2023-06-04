@@ -39,7 +39,9 @@ const Orders = ({ isLogin }) => {
 								<header className="orders__product-header">
 									<p className="orders__product-date">{order.date}</p>
 									<p className="orders__product-total">
-                    Total:<span> ${order.total}</span>
+                    Total:<span> ${order.total.toLocaleString("es-MX", {
+											currency: "MXN",
+										})}</span>
 									</p>
 								</header>
 								{order?.products?.map((product) => (
@@ -70,7 +72,9 @@ const Orders = ({ isLogin }) => {
 														{product["order_details"]?.quantity}
 													</span>
 													<span className="orders__product-price">
-														{`$ ${product["order_details"]?.total}`}
+														{`$ ${product["order_details"]?.total.toLocaleString("es-MX", {
+															currency: "MXN",
+														})}`}
 													</span>
 												</div>
 											</div>

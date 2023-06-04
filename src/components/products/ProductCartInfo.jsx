@@ -29,7 +29,9 @@ const ProductCartInfo = ({ product, getAllProductsCart }) => {
 			<div className="cart__product-footer">
 				<p className="cart__product-total">Total:</p>
 				<span className="cart__product-value">
-          ${product.quantity.quantity * product.price}
+          ${(product.quantity.quantity * product.price).toLocaleString("es-MX", {
+						currency: "MXN",
+					})}
 				</span>
 			</div>
 		</article>

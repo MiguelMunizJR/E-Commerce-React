@@ -213,8 +213,8 @@ a {
 }
 
 .productinfo__price-value {
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
   margin-left: 13px;
 }
 
@@ -451,7 +451,7 @@ a {
 .cart__product-value {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #666;
+  color: #555;
 }
 
 @media screen and (min-width: 580px) {

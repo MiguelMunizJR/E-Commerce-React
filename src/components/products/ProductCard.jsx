@@ -44,7 +44,9 @@ const ProductCard = ({ product, isLogin }) => {
 				<footer className="product__footer">
 					<div className="product__price">
 						<p className="product__price-title">Price</p>
-						<span className="product__price-value">$ {product?.price}</span>
+						<span className="product__price-value">${product?.price.toLocaleString("es-MX", {
+							currency: "MXN",
+						})}</span>
 					</div>
 					<button className="product__btn" onClick={handleAddCart}>
 						<CartSvg className="product__btn-cart" />
