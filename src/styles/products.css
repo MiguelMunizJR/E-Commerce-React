@@ -25,7 +25,8 @@ a {
   align-items: center;
   text-align: center;
   color: #444;
-  box-shadow: 2px 2px 8px #ccc;
+  background-color: #fff;
+  box-shadow: 2px 2px 8px #ddd;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -103,10 +104,11 @@ a {
 /* Product details */
 .productinfo {
   margin: 0 auto;
-  width: 85%;
+  width: 95%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
   color: #444;
 }
 
@@ -146,13 +148,16 @@ a {
 }
 
 .productinfo__body {
-  margin: 9rem auto 0;
+  width: 90%;
+  margin: 6rem auto 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-around;
 }
 
 .productinfo__img-container {
-  width: 40%;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,19 +171,19 @@ a {
 }
 
 .productinfo__product {
-  width: 40%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
 .productinfo__title {
-  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
 .productinfo__description {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
   text-wrap: balance;
 }
@@ -279,11 +284,12 @@ a {
 }
 
 .productinfo__footer {
-  margin: 10rem auto 0;
   width: 100%;
+  margin: 10rem auto 0;
 }
 
 .productinfo__footer-title {
+  padding-left: .5rem;
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--color-button-primary);
@@ -294,9 +300,9 @@ a {
   padding: 1rem 0;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   justify-items: center;
-  row-gap: 3rem;
+  row-gap: 2rem;
 }
 
 .productdetails__card {
@@ -471,6 +477,21 @@ a {
   .productinfo__return {
     display: flex;
   }
+
+  .productinfo__body {
+    width: 75%;
+  }
+
+  .productinfo__footer-title {
+    padding-left: 3rem;
+  }
+
+  .productinfo__footer-container {
+    margin: 2rem auto;
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 3rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -481,6 +502,38 @@ a {
 
   .productinfo__return {
     left: 6rem;
+  }
+
+  .productinfo__body {
+    margin: 9rem auto 0;
+    width: 85%;
+    flex-direction: row;
+  }
+
+  .productinfo__img-container {
+    width: 50%;
+  }
+
+  .productinfo__product {
+    width: 40%;
+  }
+
+  .productinfo__title {
+    font-size: 1.3rem;
+  }
+
+  .productinfo__description {
+    font-size: .95rem;
+  }
+
+  .productinfo__footer-title {
+    padding-left: 4rem;
+  }
+
+  .productinfo__footer-container {
+    margin: 3rem auto 7rem;
+    width: 85%;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

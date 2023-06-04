@@ -35,7 +35,7 @@ const Orders = ({ isLogin }) => {
 						<OrdersLoading />
 					) : orders?.length !== 0 ? (
 						orders?.map((order) => (
-							<main className="orders__product-card" key={order.id}>
+							<article className="orders__product-card" key={order.id}>
 								<header className="orders__product-header">
 									<p className="orders__product-date">{order.date}</p>
 									<p className="orders__product-total">
@@ -65,17 +65,19 @@ const Orders = ({ isLogin }) => {
 												>
 													{product.title}
 												</button>
-												<span className="orders__product-quantity">
-													{product["order_details"]?.quantity}
-												</span>
-												<span className="orders__product-price">
-													{`$ ${product["order_details"]?.total}`}
-												</span>
+												<div className="orders__product-div">
+													<span className="orders__product-quantity">
+														{product["order_details"]?.quantity}
+													</span>
+													<span className="orders__product-price">
+														{`$ ${product["order_details"]?.total}`}
+													</span>
+												</div>
 											</div>
 										</div>
 									</article>
 								))}
-							</main>
+							</article>
 						))
 					) : (
 						<div className="orders__container-div">

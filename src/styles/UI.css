@@ -2,7 +2,7 @@
   --color-header-title: #1b85e9;
   --color-header-title-hover: #2a96fc;
 
-  --color-header-links: #5f5f5f;
+  --color-header-links: #797979;
   --color-header-links-hover: #393939;
 
   --color-primary: #252c35;
@@ -80,8 +80,8 @@ a {
 
 .header__profile {
   margin-right: 5px;
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
 }
@@ -149,9 +149,9 @@ a {
 }
 
 .header__cart-btn {
+  padding: .5rem;
   display: flex;
   align-items: center;
-  gap: 5px;
   font-size: 20px;
   background-color: transparent;
   color: var(--color-header-links);
@@ -161,13 +161,9 @@ a {
 
 .header__cart-btn:hover {
   color: #444;
+  background-color: #f2f2f2;
+  border-radius: 50%;
   transition: 0.3s ease-in-out;
-}
-
-.header__cart-btn p {
-  font-family: "Montserrat";
-  font-size: 16px;
-  font-weight: 500;
 }
 
 .header__item {
@@ -175,19 +171,9 @@ a {
   justify-content: center;
   align-items: center;
   font-size: 17px;
-  gap: 3px;
+  gap: 1rem;
   color: #555;
   cursor: pointer;
-}
-
-.header__item p {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.header__item:hover {
-  color: #444;
-  transition: 0.2s ease-in-out;
 }
 
 .header__auth-btns {
@@ -395,7 +381,7 @@ a {
 }
 
 .search__input {
-  width: 70%;
+  width: 100%;
   height: 2.5rem;
   padding: 0 40px 0 20px;
   font-size: 1rem;
@@ -423,10 +409,10 @@ a {
 }
 
 .search__container {
-  width: 34%;
+  width: 90%;
   max-height: 17rem;
   position: absolute;
-  top: 8.2rem;
+  top: 9rem;
   display: none;
   flex-direction: column;
   border: 1px solid #eee;
@@ -497,7 +483,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ddd;
+  background-color: #eaeeee;
 }
 
 .footer__title {
@@ -549,6 +535,14 @@ a {
     margin-right: 1rem;
     width: 40px;
     height: 40px;
+  }
+
+  .header__item {
+    gap: 2rem;
+  }
+
+  .header__cart-btn {
+    font-size: 23px;
   }
 
   .home__products {

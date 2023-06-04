@@ -90,17 +90,16 @@ const Header = ({ isLogin }) => {
 							</NavLink>
 						</div>
 					)}
-					{/* {isLogin && (
+					{isLogin && (
 						<NavLink
 							to={ROUTES_PATH.ORDERS}
 							className={({ isActive }) =>
-								isActive ? "active__link" : "header__item"
+								isActive ? "header__cart-btn" : "header__cart-btn"
 							}
 						>
 							<i className="fa-solid fa-store"></i>
-							<p>Orders</p>
 						</NavLink>
-					)} */}
+					)}
 				</div>
 				{
 					isLogin && (
@@ -109,7 +108,6 @@ const Header = ({ isLogin }) => {
 							className="header__cart-btn"
 						>
 							<i className="fa-solid fa-cart-shopping header__link"></i>
-							<p>Cart</p>
 						</button>
 					)
 				}

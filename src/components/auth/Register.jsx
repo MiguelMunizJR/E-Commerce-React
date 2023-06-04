@@ -38,7 +38,7 @@ const Login = ({ isLogin }) => {
 	};
 
 	return (
-		<section className="login">
+		<section className="auth">
 			<div className="productinfo__return">
 				<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
           Home
