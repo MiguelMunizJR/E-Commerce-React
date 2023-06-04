@@ -4,20 +4,25 @@ import { toast } from "sonner";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { ROUTES_PATH } from "../../consts";
 import { addProductToCart } from "../../services/apiServices";
+import closeCartSlider from "../../utils/closeCartSlider";
+import CartSvg from "../CartSvg";
 
 const ProductCard = ({ product, isLogin }) => {
 	const navigate = useNavigate();
 
+	// Ver la descripción del producto
 	const handleClick = () => {
 		navigate(`${ROUTES_PATH.PRODUCTS}/${product?.id}`);
 		scrollToTop();
 	};
 
-	const handleAddCart = (event) => {
-		event.stopPropagation();
+	// Agregar producto al carrito de compras
+	const handleAddCart = (evt) => {
+		evt.stopPropagation();
 
 		if (isLogin) {
 			addProductToCart(product);
+			closeCartSlider();
 		} else {
 			toast("You must login to continue", {
 				action: {
@@ -33,7 +38,7 @@ const ProductCard = ({ product, isLogin }) => {
 		<>
 			<article className="product__card" onClick={handleClick}>
 				<header className="product__header">
-					<img src={product?.image} alt="" className="product__img" />
+					<img src={product?.image} alt={product?.title} className="product__img" loading="lazy" />
 				</header>
 				<h2 className="product__title">{product?.title}</h2>
 				<footer className="product__footer">
@@ -42,7 +47,7 @@ const ProductCard = ({ product, isLogin }) => {
 						<span className="product__price-value">$ {product?.price}</span>
 					</div>
 					<button className="product__btn" onClick={handleAddCart}>
-						<i className="fa-solid fa-cart-shopping"></i>
+						<CartSvg className="product__btn-cart" />
 					</button>
 				</footer>
 			</article>

@@ -340,7 +340,6 @@ a {
 .orders__loading {
   width: 100%;
   height: 20rem;
-  background-color: #fff;
 }
 
 .orders__loading-spinner {

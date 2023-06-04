@@ -86,7 +86,6 @@ a {
   width: 2.8rem;
   height: 2.8rem;
   position: relative;
-  font-size: 1rem;
   border: none;
   border-radius: 50%;
   color: #fff;
@@ -99,6 +98,11 @@ a {
   box-shadow: 4px 4px 8px #aaa;
   background-color: var(--color-button-primary-hover);
   transition: 0.3s;
+}
+
+.product__btn-cart {
+  color: #fff;
+  width: 22px;
 }
 
 /* Product details */
@@ -281,6 +285,11 @@ a {
 .productinfo__footer-btn:hover {
   box-shadow: 3px 3px 7px #969697;
   transition: 0.4s;
+}
+
+.productinfo__footer-cart {
+  width: 20px;
+  color: #fff;
 }
 
 .productinfo__footer {

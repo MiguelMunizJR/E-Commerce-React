@@ -9,6 +9,7 @@ import useProducts from "../../hooks/useProducts";
 import closeCartSlider from "../../utils/closeCartSlider";
 import { ProductsLoading } from "../Loading";
 import { addProductToCart } from "../../services/apiServices";
+import CartSvg from "../CartSvg";
 
 const ProductDetails = ({ isLogin }) => {
 	const { id } = useParams();
@@ -94,6 +95,7 @@ const ProductDetails = ({ isLogin }) => {
 									src={productInfo?.image}
 									alt={productInfo?.title}
 									className="productinfo__img"
+									loading="lazy"
 								/>
 							</div>
 							<div className="productinfo__product">
@@ -136,7 +138,8 @@ const ProductDetails = ({ isLogin }) => {
 										className="productinfo__footer-btn"
 										onClick={handleAddCart}
 									>
-                    Add to car <i className="fa-solid fa-cart-shopping"></i>
+                    Add to car
+										<CartSvg className="productinfo__footer-cart" />
 									</button>
 								</footer>
 							</div>
