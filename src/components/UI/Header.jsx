@@ -10,6 +10,7 @@ import toggleCart from "../../utils/toggleCart";
 import { ROUTES_PATH } from "../../consts";
 import { orderCheckout } from "../../services/apiServices";
 import useCart from "../../hooks/useCart";
+import CartSvg from "../CartSvg";
 
 const Header = ({ isLogin }) => {
 	const navigate = useNavigate();
@@ -51,63 +52,62 @@ const Header = ({ isLogin }) => {
 				</NavLink>
 			</div>
 			<nav className="header__nav">
-				<div className="header__item">
-					{isLogin ? (
-						<Menu>
-							<Menu.Button as="div" className="header__profile">
-								<img
-									src="https://i.postimg.cc/B6Lr41Hc/user-profile.png"
-									alt="user_profile"
-								/>
-							</Menu.Button>
-							<Menu.Items className="header__profile-menu">
-								<Menu.Item>
-									{({ active }) => (
-										<button
-											className={`${
-												active
-													? "header__profile-logout-hover"
-													: "header__profile-logout"
-											}`}
-											onClick={() => logout()}
-										>
+				{isLogin ? (
+					<Menu>
+						<Menu.Button as="div" className="header__profile">
+							<img
+								src="https://i.postimg.cc/B6Lr41Hc/user-profile.png"
+								alt="user_profile"
+								loading="lazy"
+							/>
+						</Menu.Button>
+						<Menu.Items className="header__profile-menu">
+							<Menu.Item>
+								{({ active }) => (
+									<button
+										className={`${
+											active
+												? "header__profile-logout-hover"
+												: "header__profile-logout"
+										}`}
+										onClick={() => logout()}
+									>
                       Log out
-										</button>
-									)}
-								</Menu.Item>
-							</Menu.Items>
-						</Menu>
-					) : (
-						<div className="header__auth-btns">
-							<NavLink to={ROUTES_PATH.LOGIN} className="header__auth-login">
+									</button>
+								)}
+							</Menu.Item>
+						</Menu.Items>
+					</Menu>
+				) : (
+					<div className="header__auth-btns">
+						<NavLink to={ROUTES_PATH.LOGIN} className="header__auth-login">
                 Login
-							</NavLink>
-							<NavLink
-								to={ROUTES_PATH.REGISTER}
-								className="header__auth-signup"
-							>
-                Sign up
-							</NavLink>
-						</div>
-					)}
-					{isLogin && (
-						<NavLink
-							to={ROUTES_PATH.ORDERS}
-							className={({ isActive }) =>
-								isActive ? "header__cart-btn" : "header__cart-btn"
-							}
-						>
-							<i className="fa-solid fa-store"></i>
 						</NavLink>
-					)}
-				</div>
+						<NavLink
+							to={ROUTES_PATH.REGISTER}
+							className="header__auth-signup"
+						>
+                Sign up
+						</NavLink>
+					</div>
+				)}
+				{isLogin && (
+					<NavLink
+						to={ROUTES_PATH.ORDERS}
+						className={({ isActive }) =>
+							isActive ? "header__cart-btn" : "header__cart-btn"
+						}
+					>
+						<i className="fa-solid fa-store"></i>
+					</NavLink>
+				)}
 				{
 					isLogin && (
 						<button
 							onClick={() => toggleCart(isLogin, getAllProductsCart)}
 							className="header__cart-btn"
 						>
-							<i className="fa-solid fa-cart-shopping header__link"></i>
+							<CartSvg className="header__item-cart" />
 						</button>
 					)
 				}
@@ -116,8 +116,14 @@ const Header = ({ isLogin }) => {
 			<section className="cart">
 				<h2 className="cart__title">Shopping cart</h2>
 				<article className="cart__container">
-					{loading && isLogin ? (
+					{loading ? (
 						<CartLoading />
+					) : cart?.products.length < 1 ? (
+						<article className="cart__container-empty">
+							<CartSvg className="cart__container-empty-cart" />
+							<h5>Empty cart</h5>
+							<small>Please add products to continue with your order</small>
+						</article>
 					) : (
 						cart?.products?.map((product) => (
 							<ProductCartInfo
@@ -125,7 +131,7 @@ const Header = ({ isLogin }) => {
 								product={product}
 								getAllProductsCart={getAllProductsCart}
 							/>
-						))
+						))					
 					)}
 				</article>
 				<footer className="cart__footer">
