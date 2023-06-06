@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { ROUTES_PATH, URL_API } from "../consts";
 import getConfig from "../utils/getConfig";
@@ -6,7 +6,6 @@ import getConfig from "../utils/getConfig";
 const useCart = () => {
 	const [cart, setCart] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
 
 	//* Obtener productos del carrito
 	const getAllProductsCart = () => {
@@ -19,16 +18,10 @@ const useCart = () => {
 				setCart(res?.data.cart);
 				setLoading(false);
 			})
-			.catch((err) => {
-				setError(err.message);
-			});
+			.catch(() => {});
 	};
 
-	useEffect(() => {
-		getAllProductsCart();
-	}, []);
-
-	return { cart, loading, error, getAllProductsCart };
+	return { cart, loading, getAllProductsCart };
 };
 
 export default useCart;

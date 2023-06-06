@@ -7,6 +7,7 @@ import "./styles/UI.css";
 import "./styles/products.css";
 // Utils
 import { ROUTES_PATH } from "./consts";
+import { startTokenCheck } from "./utils/auth/authServices";
 // Components with lazy loading
 const Header = lazy(() => import("./components/UI/Header"));
 const Home = lazy(() => import("./components/UI/Home"));
@@ -18,14 +19,15 @@ const Loading= lazy(() => import("./components/Loading"));
 const Orders = lazy(() => import("./components/Orders"));
 const ProductDetails = lazy(() => import("./components/products/ProductDetails")
 );
+const storedToken = localStorage.getItem("token");
 
 function App() {
 	const [isLogin, setIsLogin] = useState(false);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token) {
+		if (storedToken) {
 			setIsLogin(true);
+			startTokenCheck(storedToken);
 		}
 	}, [isLogin]);
 
@@ -49,7 +51,7 @@ function App() {
 						element={<ProductDetails isLogin={isLogin} />}
 					/>
 					<Route element={<ProtectedRoutes isLogin={isLogin} />}>
-						<Route path={ROUTES_PATH.ORDERS} element={<Orders />} />
+						<Route path={ROUTES_PATH.ORDERS} element={<Orders isLogin={isLogin} />} />
 					</Route>
 				</Routes>
 				<Footer />

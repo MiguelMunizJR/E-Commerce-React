@@ -18,6 +18,12 @@ const Login = ({ isLogin, setIsLogin }) => {
 	}, []);
 
 	const formSubmit = (data) => {
+		const { email, password } = data;
+
+		if (email === "" || password === "") {
+			toast.error("Please enter your email and password");
+			return;
+		}
 		const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
 
 		axios
@@ -27,13 +33,18 @@ const Login = ({ isLogin, setIsLogin }) => {
 				setIsLogin(true);
 				toast.success("You are logged in");
 				navigate(ROUTES_PATH.HOME);
+				reset({
+					email: "",
+					password: "",
+				});
 			})
-			.catch(() => toast.error("Error trying to log in"));
-
-		reset({
-			email: "",
-			password: "",
-		});
+			.catch((err) => {
+				if (err.response?.status === 401) {
+					toast.error("Incorrect email or password");
+					return;
+				}
+				toast.error("An unexpected error occurred, try again later.");
+			});
 	};
 
 	return (
