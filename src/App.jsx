@@ -35,9 +35,9 @@ function App() {
 		<div className="App">
 			<Toaster richColors position="top-center" closeButton />
 			<Suspense fallback={<Loading />}>
-				<Header isLogin={isLogin} />
+				<Header isLogin={isLogin} storedToken={storedToken} />
 				<Routes>
-					<Route path={ROUTES_PATH.HOME} element={<Home />} />
+					<Route path={ROUTES_PATH.HOME} element={<Home isLogin={isLogin} storedToken={storedToken} />} />
 					<Route
 						path={ROUTES_PATH.LOGIN}
 						element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}
@@ -48,10 +48,10 @@ function App() {
 					/>
 					<Route
 						path={ROUTES_PATH.PRODUCT_ID}
-						element={<ProductDetails isLogin={isLogin} />}
+						element={<ProductDetails isLogin={isLogin} storedToken={storedToken} />}
 					/>
 					<Route element={<ProtectedRoutes isLogin={isLogin} />}>
-						<Route path={ROUTES_PATH.ORDERS} element={<Orders isLogin={isLogin} />} />
+						<Route path={ROUTES_PATH.ORDERS} element={<Orders isLogin={isLogin} storedToken={storedToken} />} />
 					</Route>
 				</Routes>
 				<Footer />

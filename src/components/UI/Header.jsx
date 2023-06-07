@@ -13,7 +13,7 @@ import { orderCheckout } from "../../services/apiServices";
 import useCart from "../../hooks/useCart";
 import CartSvg from "../CartSvg";
 
-const Header = ({ isLogin }) => {
+const Header = ({ isLogin, storedToken }) => {
 	const navigate = useNavigate();
 	const { cart, loading, getAllProductsCart } = useCart();
 
@@ -113,7 +113,7 @@ const Header = ({ isLogin }) => {
 				{
 					isLogin && (
 						<button
-							onClick={() => toggleCart(isLogin, getAllProductsCart)}
+							onClick={() => toggleCart(isLogin, getAllProductsCart, storedToken)}
 							className="header__cart-btn"
 						>
 							<CartSvg className="header__item-cart" />

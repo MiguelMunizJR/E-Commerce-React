@@ -12,13 +12,13 @@ const token = localStorage.getItem("token");
 const ProductCard = ({ product }) => {
 	const navigate = useNavigate();
 
-	// Ver la descripción del producto
+	//* Ver la descripción del producto
 	const handleClick = () => {
 		navigate(`${ROUTES_PATH.PRODUCTS}/${product?.id}`);
 		scrollToTop();
 	};
 
-	// Agregar producto al carrito de compras
+	//* Agregar producto al carrito de compras
 	const handleAddCart = (evt) => {
 		evt.stopPropagation();
 		evt.preventDefault();

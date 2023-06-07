@@ -4,20 +4,22 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import closeCartSlider from "../../utils/closeCartSlider.js";
 import { ProductsLoading } from "../Loading";
 import useProducts from "../../hooks/useProducts.js";
+import { checkTokenValidity } from "../../utils/auth/authServices.js";
 
-const Home = () => {
+const Home = ({ isLogin, storedToken }) => {
 	const [filteredProducts, setFilteredProducts] = useState(null);
 	const { products, productsCategories, loading } = useProducts();
 
 	useEffect(() => {
+		isLogin && checkTokenValidity(storedToken);
 		closeCartSlider();
 		scrollToTop();
-	}, []);
+	}, [isLogin]);
 
 	const searchAndFilterProducts = (evt, category) => {
 		const { value } = evt.target;
 		let productCat;
-
+		closeCartSlider();
 		//* Filtrado mediante el input search
 		const filterSearchResult = products?.filter((item) =>
 			item?.title.toLowerCase().includes(value.toLowerCase().trim())

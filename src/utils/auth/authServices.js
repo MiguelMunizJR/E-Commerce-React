@@ -21,5 +21,5 @@ export const checkTokenValidity = (userToken) => {
 export const startTokenCheck = (userToken) => {
 	setInterval(() => {
 		checkTokenValidity(userToken);
-	}, 1 * 10 * 1000); //* Validamos el token cada minuto
+	}, 1 * 60 * 1000); //* Validamos el token cada minuto
 };

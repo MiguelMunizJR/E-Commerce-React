@@ -5,16 +5,20 @@ import { ROUTES_PATH } from "../consts";
 import useOrders from "../hooks/useOrders";
 import { OrdersLoading } from "./Loading";
 import closeCartSlider from "../utils/closeCartSlider";
+import { checkTokenValidity } from "../utils/auth/authServices";
 
-const Orders = ({ isLogin }) => {
+const Orders = ({ isLogin, storedToken }) => {
 	const navigate = useNavigate();
 	const { orders, loading, getAllOrders } = useOrders();
 
 	useEffect(() => {
-		isLogin && getAllOrders();
+		if (isLogin) {
+			checkTokenValidity(storedToken);
+			getAllOrders();
+		}
 		closeCartSlider();
 		scrollToTop();
-	}, []);
+	}, [isLogin]);
 
 	return (
 		<section className="orders">

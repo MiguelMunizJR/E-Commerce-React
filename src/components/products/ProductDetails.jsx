@@ -10,10 +10,11 @@ import closeCartSlider from "../../utils/closeCartSlider";
 import { ProductsLoading } from "../Loading";
 import { addProductToCart } from "../../services/apiServices";
 import CartSvg from "../CartSvg";
+import { checkTokenValidity } from "../../utils/auth/authServices";
 
 const token = localStorage.getItem("token");
 
-const ProductDetails = () => {
+const ProductDetails = ({ isLogin, storedToken }) => {
 	const { id } = useParams();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
@@ -33,6 +34,10 @@ const ProductDetails = () => {
 			.catch(() => {
 				toast.error("There was an error in obtaining product");
 			});
+
+		if (isLogin) {
+			checkTokenValidity(storedToken);
+		}
 
 		closeCartSlider();
 		scrollToTop();
