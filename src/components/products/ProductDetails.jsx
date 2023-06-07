@@ -11,7 +11,9 @@ import { ProductsLoading } from "../Loading";
 import { addProductToCart } from "../../services/apiServices";
 import CartSvg from "../CartSvg";
 
-const ProductDetails = ({ isLogin }) => {
+const token = localStorage.getItem("token");
+
+const ProductDetails = () => {
 	const { id } = useParams();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
@@ -21,7 +23,7 @@ const ProductDetails = ({ isLogin }) => {
 
 	useEffect(() => {
 		const URL = `${URL_API}${ROUTES_PATH.PRODUCTS}/${id}`;
-		
+
 		axios
 			.get(URL)
 			.then((res) => {
@@ -46,7 +48,7 @@ const ProductDetails = ({ isLogin }) => {
 
 	// Agregar al carrito de compras
 	const handleAddCart = () => {
-		if (isLogin) {
+		if (token) {
 			addProductToCart(productInfo, quantity);
 			closeCartSlider();
 		} else {
@@ -58,7 +60,7 @@ const ProductDetails = ({ isLogin }) => {
 			});
 			navigate(ROUTES_PATH.LOGIN);
 		}
-		
+
 		setQuantity(1);
 	};
 

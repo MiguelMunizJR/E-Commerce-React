@@ -7,7 +7,9 @@ import { addProductToCart } from "../../services/apiServices";
 import closeCartSlider from "../../utils/closeCartSlider";
 import CartSvg from "../CartSvg";
 
-const ProductCard = ({ product, isLogin }) => {
+const token = localStorage.getItem("token");
+
+const ProductCard = ({ product }) => {
 	const navigate = useNavigate();
 
 	// Ver la descripción del producto
@@ -19,8 +21,9 @@ const ProductCard = ({ product, isLogin }) => {
 	// Agregar producto al carrito de compras
 	const handleAddCart = (evt) => {
 		evt.stopPropagation();
+		evt.preventDefault();
 
-		if (isLogin) {
+		if (token) {
 			addProductToCart(product);
 			closeCartSlider();
 		} else {
