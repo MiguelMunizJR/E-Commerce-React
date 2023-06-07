@@ -4,14 +4,12 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import closeCartSlider from "../../utils/closeCartSlider.js";
 import { ProductsLoading } from "../Loading";
 import useProducts from "../../hooks/useProducts.js";
-import { checkTokenValidity } from "../../utils/auth/authServices.js";
 
-const Home = ({ isLogin, storedToken }) => {
+const Home = ({ isLogin }) => {
 	const [filteredProducts, setFilteredProducts] = useState(null);
 	const { products, productsCategories, loading } = useProducts();
 
 	useEffect(() => {
-		isLogin && checkTokenValidity(storedToken);
 		closeCartSlider();
 		scrollToTop();
 	}, [isLogin]);

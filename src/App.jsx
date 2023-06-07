@@ -37,7 +37,7 @@ function App() {
 			<Suspense fallback={<Loading />}>
 				<Header isLogin={isLogin} storedToken={storedToken} />
 				<Routes>
-					<Route path={ROUTES_PATH.HOME} element={<Home isLogin={isLogin} storedToken={storedToken} />} />
+					<Route path={ROUTES_PATH.HOME} element={<Home isLogin={isLogin} />} />
 					<Route
 						path={ROUTES_PATH.LOGIN}
 						element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}
