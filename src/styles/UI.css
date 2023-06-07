@@ -17,7 +17,7 @@
     -3.8px -0.1px 4.3px -2.5px hsl(var(--shadow-color-cart) / 0.36);
 
   /* Header Shadows */
-  --shadow-color-header: 0deg 0% 85%;
+  --shadow-color-header: 0deg 0% 90%;
   --shadow-elevation-medium: 0px 0.3px 0.3px
       hsl(var(--shadow-color-header) / 0.36),
     0px 0.9px 1px -0.8px hsl(var(--shadow-color-header) / 0.36),
@@ -74,27 +74,28 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .8rem;
+  gap: .4rem;
   list-style: none;
 }
 
 .header__profile {
-  margin-right: 5px;
-  width: 32px;
-  height: 32px;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header__profile-menu {
-  padding-top: 1rem;
-  width: 8rem;
-  height: 8rem;
+  width: 9rem;
+  height: 4rem;
   position: absolute;
   top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #fff;
   box-shadow: 3px 3px 8px #e2e2e2;
   border-radius: 5px;
@@ -103,42 +104,27 @@ a {
   z-index: 1000;
 }
 
-.header__profile-item {
-  color: #888;
-  font-size: 1rem;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.header__profile-item-hover {
-  color: #666;
-  font-size: 1rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-
 .header__profile-logout {
-  padding: 5px 10px;
-  position: absolute;
-  bottom: 10px;
-  font-size: 0.9rem;
+  padding: 8px 25px;
+  position: relative;
+  font-size: 1rem;
   color: #fff;
   background-color: #ff0000b9;
   border: none;
   border-radius: 3px;
+  box-shadow: 3px 3px 8px #eee;
 }
 
 .header__profile-logout-hover {
-  padding: 5px 10px;
-  position: absolute;
-  bottom: 10px;
-  font-size: 0.9rem;
+  padding: 8px 25px;
+  position: relative;
+  font-size: 1rem;
   color: #fff;
-  background-color: #ff0000cc;
+  background-color: #ff0000ce;
   border: none;
   border-radius: 3px;
-  transition: 0.3s ease-in-out;
+  box-shadow: 4px 4px 10px #eee;
+  transition: all .3s ease-in-out;
   cursor: pointer;
 }
 
@@ -255,8 +241,8 @@ a {
 
 .cart__container {
   width: 100%;
-  height: 65%;
-  border-bottom: 0.1rem solid #ddd;
+  height: 64%;
+  border-bottom: 1px solid #eee;
   overflow-y: scroll;
 }
 
@@ -269,7 +255,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: #777;
 }
 
@@ -287,7 +273,6 @@ a {
   width: 100%;
   display: grid;
   position: relative;
-  background-color: #f9f9f9;
   grid-template-columns: repeat(2, 1fr);
   z-index: 100;
 }
@@ -311,7 +296,7 @@ a {
 }
 
 .cart__footer-btn {
-  margin-top: 1.3rem;
+  margin-top: 1rem;
   width: 100%;
   height: 2.5rem;
   display: flex;
@@ -403,7 +388,7 @@ a {
   border-radius: 20px;
   border: none;
   outline: none;
-  box-shadow: 2px 2px 5px #ccc;
+  box-shadow: 2px 2px 8px #ddd;
 }
 
 .search__input:hover {
@@ -432,7 +417,7 @@ a {
 
 .search__categories-container {
   margin: 0 auto;
-  width: 90%;
+  width: 95%;
   padding-top: .8rem;
   display: flex;
   justify-content: space-evenly;
@@ -441,7 +426,7 @@ a {
 .search__categories-container button {
   padding: .4rem .7rem;
   font-size: .95rem;
-  color: #555;
+  color: #666;
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -450,9 +435,9 @@ a {
 
 .search__categories-container button:hover {
   color: #444;
-  background-color: #f1f1f1;
+  background-color: #fff;
   box-shadow: 3px 3px 8px #e1e1e1;
-  transition: all .3s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .home__container {
@@ -497,7 +482,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #eaeeee;
+  background-color: #e5e5e5;
 }
 
 .footer__title {
@@ -545,10 +530,14 @@ a {
     font-size: 1.8rem;
   }
 
+  .header__nav {
+    gap: .8rem;
+  }
+
   .header__profile {
     margin-right: 1rem;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
   }
 
   .header__cart-btn {

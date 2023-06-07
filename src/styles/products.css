@@ -32,11 +32,12 @@ a {
 }
 
 .product__card:hover {
-  transform: scale(1.01);
-  transition: 0.1s;
+  transform: scale(1.015);
+  transition: .2s;
 }
 
 .product__header {
+  padding-top: 1rem;
   width: 7rem;
   height: 7rem;
   overflow: hidden;
@@ -107,13 +108,12 @@ a {
 
 /* Product details */
 .productinfo {
-  margin: 0 auto;
+  margin: 2rem auto;
   max-width: 80rem;
   width: 95%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   color: #444;
 }
 
@@ -121,7 +121,7 @@ a {
   max-width: 70rem;
   width: 100%;
   position: absolute;
-  top: 5rem;
+  top: 6rem;
   right: 4rem;
   display: none;
   align-items: center;
@@ -131,7 +131,7 @@ a {
 }
 
 .productinfo__return-home {
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: 600;
 }
 
@@ -143,20 +143,22 @@ a {
 }
 
 .productinfo__return-product {
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: 600;
 }
 
 .productinfo__container {
+  margin-top: 3rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
 }
 
 .productinfo__body {
+  margin: 2rem auto;
   width: 90%;
-  margin: 6rem auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,7 +166,8 @@ a {
 }
 
 .productinfo__img-container {
-  margin-top: 2rem;
+  width: 20rem;
+  height: 12rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -287,7 +290,8 @@ a {
 
 .productinfo__footer-btn:hover {
   box-shadow: 3px 3px 7px #969697;
-  transition: 0.4s;
+  background-color: #2991f1;
+  transition: all .3s ease-in-out;
 }
 
 .productinfo__footer-cart {
@@ -359,8 +363,7 @@ a {
 
 /* Cart product */
 .cart__product-card {
-  padding: 10px 8px 10px 10px;
-  min-height: 9rem;
+  padding: 8px 8px 8px 10px;
   display: flex;
   flex-direction: column;
   color: #555;
@@ -488,10 +491,17 @@ a {
 
   .productinfo__return {
     display: flex;
+    left: 4rem;
   }
 
   .productinfo__body {
+    margin-top: 4rem;
     width: 75%;
+  }
+
+  .productinfo__img-container {
+    width: 22rem;
+    height: 15rem;
   }
 
   .productinfo__footer-title {
@@ -516,14 +526,23 @@ a {
     left: 6rem;
   }
 
+  .productinfo__return-home {
+    font-size: 1rem;
+  }
+
+  .productinfo__return-product {
+    font-size: 1rem;
+  }
+
   .productinfo__body {
-    margin: 9rem auto 0;
+    margin:5rem auto 0;
     width: 85%;
     flex-direction: row;
   }
 
   .productinfo__img-container {
-    width: 50%;
+    width: 25rem;
+    height: 18rem;
   }
 
   .productinfo__product {

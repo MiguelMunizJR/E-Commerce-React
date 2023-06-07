@@ -15,7 +15,6 @@ export const checkTokenValidity = (userToken) => {
 			logout();
 		}, 3000); //* Delay de 3 segundos
 	}
-	console.log("Token validado");
 	return;
 };
 

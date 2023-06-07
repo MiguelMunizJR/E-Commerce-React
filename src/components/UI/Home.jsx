@@ -5,7 +5,7 @@ import closeCartSlider from "../../utils/closeCartSlider.js";
 import { ProductsLoading } from "../Loading";
 import useProducts from "../../hooks/useProducts.js";
 
-const Home = ({ isLogin }) => {
+const Home = () => {
 	const [filteredProducts, setFilteredProducts] = useState(null);
 	const { products, productsCategories, loading } = useProducts();
 
@@ -81,7 +81,6 @@ const Home = ({ isLogin }) => {
 								<ProductCard
 									key={product.id}
 									product={product}
-									isLogin={isLogin}
 								/>
 							))
 						) : (
@@ -89,7 +88,6 @@ const Home = ({ isLogin }) => {
 								<ProductCard
 									key={product.id}
 									product={product}
-									isLogin={isLogin}
 								/>
 							))
 						)}
