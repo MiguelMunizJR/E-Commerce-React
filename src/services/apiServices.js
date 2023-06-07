@@ -11,7 +11,6 @@ export const removeProductCart = (product, getAllProductsCart) => {
 	axios
 		.delete(URL, getConfig())
 		.then(() => {
-			toast.success(`${product?.title} removed from cart`);
 			getAllProductsCart();
 		})
 		.catch(() => {
