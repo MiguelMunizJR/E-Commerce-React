@@ -18,6 +18,24 @@ const Login = ({ isLogin }) => {
 	}, []);
 
 	const formSubmit = (data) => {
+		const { firstName, lastName, email, password, phone } = data;
+
+		//! Validaciones
+		if (email.trim() === "" || password.trim() === "" || lastName.trim() === "" || firstName.trim() === "" || phone.trim() === "") {
+			toast.error("Please complete all fields");
+			return;
+		}
+
+		if (!isNaN(firstName) || !isNaN(lastName)) {
+			toast.error("Sorry, you cannot use numbers in the name fields.");
+			return;
+		}
+
+		if (isNaN(phone)) {
+			toast.error("You can only use numbers in the phone field.");
+			return;
+		}
+
 		const URL = `${URL_API}${ROUTES_PATH.REGISTER}`;
 
 		axios

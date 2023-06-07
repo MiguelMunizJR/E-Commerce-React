@@ -20,10 +20,11 @@ const Login = ({ isLogin, setIsLogin }) => {
 	const formSubmit = (data) => {
 		const { email, password } = data;
 
-		if (email === "" || password === "") {
+		if (email.trim() === "" || password.trim() === "") {
 			toast.error("Please enter your email and password");
 			return;
 		}
+		
 		const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
 
 		axios
