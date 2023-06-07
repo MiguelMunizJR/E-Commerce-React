@@ -7,40 +7,72 @@ import useProducts from "../../hooks/useProducts.js";
 
 const Home = ({ isLogin }) => {
 	const [filteredProducts, setFilteredProducts] = useState(null);
-	const { products, loading } = useProducts();
+	const { products, productsCategories, loading } = useProducts();
 
 	useEffect(() => {
 		closeCartSlider();
 		scrollToTop();
 	}, []);
 
-	const searchProducts = (event) => {
-		event.preventDefault();
-		const { value } = event.target;
+	const searchAndFilterProducts = (evt, category) => {
+		const { value } = evt.target;
+		let productCat;
 
+		//* Filtrado mediante el input search
 		const filterSearchResult = products?.filter((item) =>
 			item?.title.toLowerCase().includes(value.toLowerCase().trim())
 		);
 
-		setFilteredProducts(filterSearchResult);
+		//* Filtrado mediante categorias
+		if (category !== "All") {
+			productCat = filterSearchResult?.filter(
+				(product) => product.category === category
+			);
+		} else {
+			productCat = filterSearchResult;
+		}
+
+		setFilteredProducts(productCat);
 	};
 
 	return (
 		<section className="home">
 			<article className="home__products">
-				<form className="home__search" onSubmit={(evt) => evt.preventDefault()} onChange={searchProducts}>
+				<article className="home__search">
 					<div className="search__div">
 						<input
 							type="text"
 							id="search"
-							placeholder="iPhone 14 Pro, Samsung Galaxy S23, Laptop Asus... "
+							placeholder="iPhone 14 Pro, Samsung Galaxy S23, Laptop Asus..."
 							className="search__input"
+							onChange={(evt) => searchAndFilterProducts(evt, "All")}
 						/>
 						<i className="fa-solid fa-magnifying-glass search__btn"></i>
 					</div>
-				</form>
+					<div className="search__categories-div">
+						<h5>Categories</h5>
+						<div className="search__categories-container">
+							<button onClick={(evt) => searchAndFilterProducts(evt, "All")}>
+                All
+							</button>
+							{productsCategories?.map((category, index) => (
+								<button
+									key={index}
+									onClick={(event) => searchAndFilterProducts(event, category)}
+								>
+									{category}
+								</button>
+							))}
+						</div>
+					</div>
+				</article>
 				<article className="home__container">
-					<h2 className="home__title">Products</h2>
+					<h2 className="home__title">
+            Products{" "}
+						<small>{`${
+							filteredProducts ? filteredProducts?.length : products?.length
+						}/${products?.length}`}</small>
+					</h2>
 					<article className="products__container">
 						{loading ? (
 							<ProductsLoading />

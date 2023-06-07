@@ -39,7 +39,10 @@ a {
 
 /* Login & register */
 .auth {
+  margin: 4rem auto 0;
+  max-width: 70rem;
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +51,7 @@ a {
 }
 
 .login__title {
-  margin: 10rem 0 2rem;
+  margin-bottom: 2rem;
   color: #333;
   display: flex;
   gap: 7px;
@@ -57,7 +60,7 @@ a {
 }
 
 .register__title {
-  margin: 10rem 0 2rem;
+  margin: 4rem 0 2rem;
   color: #333;
   display: flex;
   align-items: center;
@@ -171,7 +174,8 @@ a {
 
 /* Orders */
 .orders {
-  margin-top: 52px;
+  margin: 52px auto;
+  max-width: 80rem;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -385,16 +389,12 @@ a {
     font-size: 1.8rem;
   }
 
-  .auth__card {
-    align-items: center;
-  }
-
   .register__title {
     margin-bottom: 4rem;
     font-size: 1.8rem;
   }
 
-  .register__card {
+  .auth__card {
     align-items: center;
   }
 

@@ -384,6 +384,13 @@ a {
 
 .home__search {
   margin: 5px 0 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search__div {
+  width: 100%;
 }
 
 .search__input {
@@ -414,47 +421,42 @@ a {
   color: #666;
 }
 
-.search__container {
-  width: 90%;
-  max-height: 17rem;
-  position: absolute;
-  top: 9rem;
-  display: none;
-  flex-direction: column;
-  border: 1px solid #eee;
-  background-color: #fff;
-  border-radius: 3px;
-  overflow-y: auto;
-  box-shadow: 1px 1px 3px #7777777e;
-  z-index: 500;
-}
-
-.search__list {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-}
-
-.search__item {
-  padding: 10px 1rem;
+.search__categories-div {
+  padding-top: 1.5rem;
   width: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 500;
-  color: #555;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
-  z-index: 500;
 }
 
-.search__item:hover {
-  background-color: #f7f7f7;
-  transition: 0.1s ease-out;
+.search__categories-div h5 {
+  color: #333;
+}
+
+.search__categories-container {
+  margin: 0 auto;
+  width: 90%;
+  padding-top: .8rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.search__categories-container button {
+  padding: .4rem .7rem;
+  font-size: .95rem;
+  color: #555;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.search__categories-container button:hover {
+  color: #444;
+  background-color: #f1f1f1;
+  box-shadow: 3px 3px 8px #e1e1e1;
+  transition: all .3s ease-in-out;
 }
 
 .home__container {
-  margin: 2rem auto 0;
+  margin: 4rem auto 0;
   width: 100%;
   min-height: 25rem;
   border-radius: 0.5rem;
@@ -464,6 +466,12 @@ a {
   color: #333;
   font-size: 1.4rem;
   font-weight: 600;
+}
+
+.home__title small {
+  color: #777;
+  font-size: .9rem;
+  font-weight: 500;
 }
 
 .products__container {
@@ -551,6 +559,14 @@ a {
     width: 25px;
   }
 
+  .search__categories-container {
+    width: 80%;
+  }
+
+  .home__container {
+    margin-top: 1.5rem;
+  }
+
   .home__products {
     width: 83%;
   }
@@ -579,11 +595,21 @@ a {
   }
 
   .home__products {
+    max-width: 80rem;
     width: 86%;
   }
 
+  .home__search {
+    flex-direction: row;
+    gap: 6rem;
+  }
+
   .search__input {
-    width: 50%;
+    width: 100%;
+  }
+
+  .search__categories-div {
+    margin-top: -2rem;
   }
 }
 
