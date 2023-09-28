@@ -128,7 +128,7 @@ const Header = ({ isLogin, storedToken }) => {
           <article className="cart__container">
             {loading ? (
               <CartLoading />
-            ) : cart?.products.length < 1 ? (
+            ) : cart?.products?.length < 1 ? (
               <article className="cart__container-empty">
                 <CartSvg className="cart__container-empty-cart" />
                 <h5>Empty cart</h5>

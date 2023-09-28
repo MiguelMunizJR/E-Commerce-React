@@ -8,107 +8,115 @@ import { toast } from "sonner";
 import closeCartSlider from "../../utils/closeCartSlider";
 
 const Login = ({ isLogin, setIsLogin }) => {
-	const { register, handleSubmit, reset } = useForm();
-	const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		isLogin && navigate(ROUTES_PATH.HOME);
-		closeCartSlider();
-		scrollToTop();
-	}, []);
+  useEffect(() => {
+    isLogin && navigate(ROUTES_PATH.HOME);
+    closeCartSlider();
+    scrollToTop();
+  }, []);
 
-	const formSubmit = (data) => {
-		const { email, password } = data;
+  const formSubmit = (data) => {
+    const { email, password } = data;
 
-		if (email.trim() === "" || password.trim() === "") {
-			toast.error("Please enter your email and password");
-			return;
-		}
-		
-		const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
+    if (email.trim() === "" || password.trim() === "") {
+      toast.error("Please enter your email and password");
+      return;
+    }
 
-		axios
-			.post(URL, data)
-			.then((res) => {
-				localStorage.setItem("token", res.data?.token);
-				setIsLogin(true);
-				toast.success("You are logged in");
-				navigate(ROUTES_PATH.HOME);
-				reset({
-					email: "",
-					password: "",
-				});
-				location.reload();
-			})
-			.catch((err) => {
-				if (err.response?.status === 401) {
-					toast.error("Incorrect email or password");
-					return;
-				}
-				toast.error("An unexpected error occurred, try again later.");
-			});
-	};
+    const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
 
-	return (
-		<section className="auth">
-			<div className="productinfo__return">
-				<p className="productinfo__return-home" onClick={() => navigate(ROUTES_PATH.HOME)}>
+    axios
+      .post(URL, data)
+      .then((res) => {
+        localStorage.setItem("token", res.data?.token);
+        setIsLogin(true);
+        toast.success("You are logged in");
+        navigate(ROUTES_PATH.HOME);
+        reset({
+          email: "",
+          password: "",
+        });
+        location.reload();
+      })
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          toast.error("Incorrect email or password");
+          return;
+        }
+        toast.error("An unexpected error occurred, try again later.");
+      });
+  };
+
+  return (
+    <section className="auth">
+      <div className="productinfo__return">
+        <p
+          className="productinfo__return-home"
+          onClick={() => navigate(ROUTES_PATH.HOME)}
+        >
           Home
-				</p>
-				<div className="productinfo__return-circle"></div>
-				<p className="productinfo__return-product">Login</p>
-			</div>
+        </p>
+        <div className="productinfo__return-circle"></div>
+        <p className="productinfo__return-product">Login</p>
+      </div>
 
-			<article className="auth__card">
-				<h2 className="login__title">
-					<i className="fa-solid fa-user"></i>Login
-				</h2>
-				<article className="login__form">
-					<form className="form" onSubmit={handleSubmit(formSubmit)}>
-						<div className="form__email">
-							<div className="form__input-div">
-								<label htmlFor="email">Email<span>*</span></label>
-								<input
-									type="email"
-									className="form__input"
-									id="email"
-									placeholder="alberto@gmail.com"
-									{...register("email")}
-									required
-								/>
-							</div>
-						</div>
-						<div className="form__password">
-							<div className="form__input-div">
-								<label htmlFor="password">Password<span>*</span></label>
-								<input
-									type="password"
-									className="form__input"
-									id="password"
-									placeholder="***********"
-									{...register("password")}
-									required
-								/>
-							</div>
-						</div>
-						<div className="form__options">
-							<div className="form__remember">
-								<input type="checkbox" name="remember" id="remember" />
-								<label htmlFor="remember">Remember me</label>
-							</div>
-							<p
-								className="form__forgot-password"
-								onClick={() => toast("in development...")}
-							>
+      <article className="auth__card">
+        <h2 className="login__title">
+          <i className="fa-solid fa-user"></i>Login
+        </h2>
+        <article className="login__form">
+          <form className="form" onSubmit={handleSubmit(formSubmit)}>
+            <div className="form__email">
+              <div className="form__input-div">
+                <label htmlFor="email">
+                  Email<span>*</span>
+                </label>
+                <input
+                  type="email"
+                  className="form__input"
+                  id="email"
+                  placeholder="alberto@gmail.com"
+                  {...register("email")}
+                  autoComplete="true"
+                  required
+                />
+              </div>
+            </div>
+            <div className="form__password">
+              <div className="form__input-div">
+                <label htmlFor="password">
+                  Password<span>*</span>
+                </label>
+                <input
+                  type="password"
+                  className="form__input"
+                  id="password"
+                  placeholder="***********"
+                  {...register("password")}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form__options">
+              <div className="form__remember">
+                <input type="checkbox" name="remember" id="remember" />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+              <p
+                className="form__forgot-password"
+                onClick={() => toast("in development...")}
+              >
                 Forgot password?
-							</p>
-						</div>
-						<button className="form__submit">Login</button>
-					</form>
-				</article>
-			</article>
-		</section>
-	);
+              </p>
+            </div>
+            <button className="form__submit">Login</button>
+          </form>
+        </article>
+      </article>
+    </section>
+  );
 };
 
 export default Login;
