@@ -51,17 +51,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 
   return (
     <section className="auth">
-      <div className="productinfo__return">
-        <p
-          className="productinfo__return-home"
-          onClick={() => navigate(ROUTES_PATH.HOME)}
-        >
-          Home
-        </p>
-        <div className="productinfo__return-circle"></div>
-        <p className="productinfo__return-product">Login</p>
-      </div>
-
       <article className="auth__card">
         <h2 className="login__title">
           <i className="fa-solid fa-user"></i>Login
@@ -106,7 +95,6 @@ const Login = ({ isLogin, setIsLogin }) => {
               </div>
               <p
                 className="form__forgot-password"
-                onClick={() => toast("in development...")}
               >
                 Forgot password?
               </p>

@@ -63,16 +63,6 @@ const Login = ({ isLogin }) => {
 
   return (
     <section className="auth">
-      <div className="productinfo__return">
-        <p
-          className="productinfo__return-home"
-          onClick={() => navigate(ROUTES_PATH.HOME)}
-        >
-          Home
-        </p>
-        <div className="productinfo__return-circle"></div>
-        <p className="productinfo__return-product">Sign up</p>
-      </div>
       <article className="auth__card">
         <h2 className="register__title">
           <i className="fa-solid fa-user"></i>Sign up
