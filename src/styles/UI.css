@@ -484,29 +484,28 @@ a {
 
 /* Footer */
 .footer {
-  padding: 1rem 0;
+  padding: .5rem;
   width: 100%;
   position: static;
   bottom: 0;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px;
   background-color: #e5e5e5;
 }
 
 .footer__title {
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
-  color: #444;
+  color: #666;
 }
 
 .footer__links {
   margin-top: 1rem;
-  width: 10rem;
   display: flex;
-  justify-content: space-evenly;
+  gap: 6px;
 }
 
 .footer__link {
