@@ -33,12 +33,17 @@ const Orders = ({ isLogin, storedToken }) => {
                 <header className="orders__product-header">
                   <p className="orders__product-date">{order.date}</p>
                   <p className="orders__product-total">
-                    Total:<span> ${order.total.toLocaleString("es-MX", {
-                      currency: "MXN",
-                    })}</span>
+                    Total:
+                    <span>
+                      {" "}
+                      $
+                      {order.total?.toLocaleString("es-MX", {
+                        currency: "MXN",
+                      })}
+                    </span>
                   </p>
                 </header>
-                {order?.products?.map((product) => (
+                {order.products?.map((product) => (
                   <article
                     className="orders__product-container"
                     key={product.id}
@@ -66,7 +71,9 @@ const Orders = ({ isLogin, storedToken }) => {
                             {product["order_details"]?.quantity}
                           </span>
                           <span className="orders__product-price">
-                            {`$ ${product["order_details"]?.total.toLocaleString("es-MX", {
+                            {`$ ${product[
+                              "order_details"
+                            ]?.total.toLocaleString("es-MX", {
                               currency: "MXN",
                             })}`}
                           </span>
