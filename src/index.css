@@ -67,6 +67,7 @@ a {
   background-color:#fff;
   border-radius: 5px;
   justify-content: center;
+  box-shadow: 4px 4px 25px #ddd;
 }
 
 .form {
@@ -446,6 +447,11 @@ a {
 @media screen and (min-width: 1024px) {
   .orders__container {
     width: 70%;
+  }
+
+  .orders__card {
+    background-color: inherit;
+    box-shadow: none;
   }
 
   .orders__product-img {

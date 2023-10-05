@@ -10,54 +10,54 @@ import CartSvg from "../CartSvg";
 const token = localStorage.getItem("token");
 
 const ProductCard = ({ product }) => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	//* Ver la descripción del producto
-	const handleClick = () => {
-		navigate(`${ROUTES_PATH.PRODUCTS}/${product?.id}`);
-		scrollToTop();
-	};
+  //* Ver la descripción del producto
+  const handleClick = () => {
+    navigate(`${ROUTES_PATH.PRODUCTS}/${product?.id}`);
+    scrollToTop();
+  };
 
-	//* Agregar producto al carrito de compras
-	const handleAddCart = (evt) => {
-		evt.stopPropagation();
-		evt.preventDefault();
+  //* Agregar producto al carrito de compras
+  const handleAddCart = (evt) => {
+    evt.stopPropagation();
+    evt.preventDefault();
 
-		if (token) {
-			addProductToCart(product);
-			closeCartSlider();
-		} else {
-			toast("You must login to continue", {
-				action: {
-					label: "Login",
-					onClick: () => navigate(ROUTES_PATH.LOGIN),
-				},
-			});
-			navigate(ROUTES_PATH.LOGIN);
-		}
-	};
+    if (token) {
+      addProductToCart(product);
+      closeCartSlider();
+    } else {
+      toast("You must login to continue", {
+        action: {
+          label: "Login",
+          onClick: () => navigate(ROUTES_PATH.LOGIN),
+        },
+      });
+      navigate(ROUTES_PATH.LOGIN);
+    }
+  };
 
-	return (
-		<>
-			<article className="product__card" onClick={handleClick}>
-				<header className="product__header">
-					<img src={product?.image} alt={product?.title} className="product__img" loading="lazy" />
-				</header>
-				<h2 className="product__title">{product?.title}</h2>
-				<footer className="product__footer">
-					<div className="product__price">
-						<p className="product__price-title">Price</p>
-						<span className="product__price-value">${product?.price.toLocaleString("es-MX", {
-							currency: "MXN",
-						})}</span>
-					</div>
-					<button className="product__btn" onClick={handleAddCart}>
-						<CartSvg className="product__btn-cart" />
-					</button>
-				</footer>
-			</article>
-		</>
-	);
+  return (
+    <>
+      <article className="product__card" onClick={handleClick}>
+        <header className="product__header">
+          <img src={product?.image} alt={product?.title} className="product__img" loading="lazy" width="100%" height="100%" />
+        </header>
+        <h2 className="product__title">{product?.title}</h2>
+        <footer className="product__footer">
+          <div className="product__price">
+            <p className="product__price-title">Price</p>
+            <span className="product__price-value">${product?.price.toLocaleString("es-MX", {
+              currency: "MXN",
+            })}</span>
+          </div>
+          <button className="product__btn" onClick={handleAddCart}>
+            <CartSvg className="product__btn-cart" />
+          </button>
+        </footer>
+      </article>
+    </>
+  );
 };
 
 export default ProductCard;
